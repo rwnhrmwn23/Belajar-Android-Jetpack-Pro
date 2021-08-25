@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.onedev.dicoding.academy.databinding.FragmentAcademyBinding
+import com.onedev.dicoding.academy.utils.DataDummy
 
 class AcademyFragment : Fragment() {
     private var _binding: FragmentAcademyBinding? = null
@@ -23,6 +25,17 @@ class AcademyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (activity != null) {
+            val course = DataDummy.generateDummyCourse()
+            val adapter = AcademyAdapter()
+            adapter.setCourses(course)
+
+            with(binding?.rvAcademy) {
+                this?.layoutManager = LinearLayoutManager(context)
+                this?.setHasFixedSize(true)
+                this?.adapter = adapter
+            }
+        }
 
     }
 

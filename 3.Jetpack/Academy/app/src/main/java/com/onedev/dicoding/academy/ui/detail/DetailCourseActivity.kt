@@ -4,17 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onedev.dicoding.academy.R
 import com.onedev.dicoding.academy.data.CourseEntity
 import com.onedev.dicoding.academy.databinding.ActivityDetailCourseBinding
 import com.onedev.dicoding.academy.databinding.ContentDetailCourseBinding
-import com.onedev.dicoding.academy.ui.bookmark.DetailCourseViewModel
 import com.onedev.dicoding.academy.ui.course.CourseReaderActivity
-import com.onedev.dicoding.academy.utils.DataDummy
-import com.onedev.dicoding.academy.utils.ExtClass.loadImage
 import com.onedev.dicoding.academy.utils.ExtClass.loadImageWithTransform
 
 class DetailCourseActivity : AppCompatActivity() {

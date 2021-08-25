@@ -1,4 +1,4 @@
-package com.onedev.dicoding.academy.ui.bookmark
+package com.onedev.dicoding.academy.ui.detail
 
 import androidx.lifecycle.ViewModel
 import com.onedev.dicoding.academy.data.CourseEntity

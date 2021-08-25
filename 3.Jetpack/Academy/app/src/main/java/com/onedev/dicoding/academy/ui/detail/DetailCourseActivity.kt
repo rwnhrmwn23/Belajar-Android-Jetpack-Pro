@@ -3,6 +3,7 @@ package com.onedev.dicoding.academy.ui.detail
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.onedev.dicoding.academy.R
 import com.onedev.dicoding.academy.data.CourseEntity
 import com.onedev.dicoding.academy.databinding.ActivityDetailCourseBinding
 import com.onedev.dicoding.academy.databinding.ContentDetailCourseBinding
+import com.onedev.dicoding.academy.ui.bookmark.DetailCourseViewModel
 import com.onedev.dicoding.academy.ui.course.CourseReaderActivity
 import com.onedev.dicoding.academy.utils.DataDummy
 import com.onedev.dicoding.academy.utils.ExtClass.loadImage
@@ -32,18 +34,18 @@ class DetailCourseActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val viewModel = ViewModelProvider(this).get(DetailCourseViewModel::class.java)
+
+
         val detailCourseAdapter = DetailCourseAdapter()
         val extras = intent.extras
         if (extras != null) {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
-                val modules = DataDummy.generateDummyModules(courseId)
+                viewModel.setSelectedCourse(courseId)
+                val modules = viewModel.getModules()
                 detailCourseAdapter.setModule(modules)
-                for (course in DataDummy.generateDummyCourse()) {
-                    if (course.courseId == courseId) {
-                        populateCourse(course)
-                    }
-                }
+                populateCourse(viewModel.getCourse())
             }
         }
 

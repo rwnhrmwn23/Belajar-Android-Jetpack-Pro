@@ -2,6 +2,7 @@ package com.onedev.dicoding.academy.ui.course
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import com.onedev.dicoding.academy.R
 import com.onedev.dicoding.academy.ui.reader.CourseReaderCallback
 import com.onedev.dicoding.academy.ui.reader.content.ModuleContentFragment
@@ -17,10 +18,13 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_reader)
 
+        val viewModel = ViewModelProvider(this).get(CourseReaderViewModel::class.java)
+
         val bundle = intent.extras
         if (bundle != null) {
             val courseId = bundle.getString(EXTRA_COURSE_ID)
             if (courseId != null) {
+                viewModel.setSelectedCourse(courseId)
                 populateFragment()
             }
         }

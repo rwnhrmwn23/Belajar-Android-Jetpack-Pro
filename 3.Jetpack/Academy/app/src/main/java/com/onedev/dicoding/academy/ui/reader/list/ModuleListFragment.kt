@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onedev.dicoding.academy.data.ModuleEntity
 import com.onedev.dicoding.academy.databinding.FragmentModuleListBinding
 import com.onedev.dicoding.academy.ui.course.CourseReaderActivity
+import com.onedev.dicoding.academy.ui.course.CourseReaderViewModel
 import com.onedev.dicoding.academy.ui.reader.CourseReaderCallback
 import com.onedev.dicoding.academy.utils.DataDummy
 
@@ -20,6 +22,7 @@ class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener 
 
     private lateinit var adapter: ModuleListAdapter
     private lateinit var courseReaderCallback: CourseReaderCallback
+    private lateinit var viewModel: CourseReaderViewModel
 
     companion object {
         const val TAG = "ModuleListFragment"
@@ -38,8 +41,10 @@ class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(requireActivity()).get(CourseReaderViewModel::class.java)
+
         adapter = ModuleListAdapter(this)
-        populateRecyclerView(DataDummy.generateDummyModules("a14"))
+        populateRecyclerView(viewModel.getModules())
     }
 
     private fun populateRecyclerView(modules: List<ModuleEntity>) {
@@ -62,6 +67,7 @@ class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener 
 
     override fun onItemClicked(position: Int, moduleId: String) {
         courseReaderCallback.moveTo(position, moduleId)
+        viewModel.setSelectedModule(moduleId)
     }
 
     override fun onDestroyView() {

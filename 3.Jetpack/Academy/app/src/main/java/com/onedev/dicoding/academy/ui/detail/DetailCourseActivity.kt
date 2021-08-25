@@ -2,12 +2,9 @@ package com.onedev.dicoding.academy.ui.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.google.android.material.snackbar.Snackbar
 import com.onedev.dicoding.academy.databinding.ActivityDetailCourseBinding
+import com.onedev.dicoding.academy.databinding.ContentDetailCourseBinding
 
 class DetailCourseActivity : AppCompatActivity() {
 
@@ -16,11 +13,12 @@ class DetailCourseActivity : AppCompatActivity() {
     }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityDetailCourseBinding
+    private lateinit var detailContentBinding: ContentDetailCourseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailCourseBinding.inflate(layoutInflater)
+        val binding = ActivityDetailCourseBinding.inflate(layoutInflater)
+        detailContentBinding = binding.detailContent
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 

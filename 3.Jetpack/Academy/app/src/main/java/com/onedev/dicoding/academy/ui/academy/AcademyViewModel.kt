@@ -6,6 +6,8 @@ import com.onedev.dicoding.academy.utils.DataDummy
 
 class AcademyViewModel: ViewModel() {
 
-    fun getCourse(): List<CourseEntity> = DataDummy.generateDummyCourse()
+    fun getCourse(): List<CourseEntity> {
+        return DataDummy.generateDummyCourse()
+    }
 
 }

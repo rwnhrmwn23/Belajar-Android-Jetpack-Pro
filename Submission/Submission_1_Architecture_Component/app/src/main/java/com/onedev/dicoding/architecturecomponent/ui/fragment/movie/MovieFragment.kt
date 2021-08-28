@@ -1,4 +1,4 @@
-package com.onedev.dicoding.architecturecomponent
+package com.onedev.dicoding.architecturecomponent.ui.fragment.movie
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentMovieBinding
-import com.onedev.dicoding.architecturecomponent.viewmodel.MainViewModel
 
 class MovieFragment : Fragment() {
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MovieViewModel
     private lateinit var movieAdapter: MovieAdapter
 
     private var _binding: FragmentMovieBinding? = null
@@ -30,7 +29,7 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         movieAdapter = MovieAdapter()
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
         val movies = viewModel.getMovies()
         binding?.rvResult.apply {

@@ -9,6 +9,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_1",
                 "@drawable/poster_suicide_squad",
                 "The Suicide Squad (2021)",
                 "08/06/2021",
@@ -20,6 +21,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_2",
                 "@drawable/poster_paw_patrol",
                 "PAW Patrol: The Movie (2021)",
                 "08/20/2021",
@@ -31,6 +33,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_3",
                 "@drawable/poster_narco_sub",
                 "Narco Sub (2021)",
                 "07/22/2021",
@@ -42,6 +45,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_4",
                 "@drawable/poster_eggs_run",
                 "Eggs Run (2021)",
                 "08/12/2021",
@@ -53,6 +57,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_5",
                 "@drawable/poster_jungle_cruise",
                 "Jungle Cruise (2021)",
                 "07/30/2021",
@@ -64,6 +69,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_6",
                 "@drawable/poster_black_widow",
                 "Black Widow (2021)",
                 "07/09/2021",
@@ -75,6 +81,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_7",
                 "@drawable/poster_f_9",
                 "F9 (2021)",
                 "06/25/2021",
@@ -86,6 +93,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_8",
                 "@drawable/poster_space_jam",
                 "Space Jam: A New Legacy (2021)",
                 "07/16/2021",
@@ -97,6 +105,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_9",
                 "@drawable/poster_tomorrow_war",
                 "The Tomorrow War (2021)",
                 "07/01/2021",
@@ -108,6 +117,7 @@ object DataDummy {
 
         movies.add(
             Movies(
+                "mov_10",
                 "@drawable/poster_infinite",
                 "Infinite (2021)",
                 "06/10/2021",
@@ -124,6 +134,7 @@ object DataDummy {
 
         tvShows.add(
             TvShows(
+                "tv_show_1",
                 "@drawable/poster_what_if",
                 "What If...? (2021)",
                 "One question changes everything.",
@@ -135,6 +146,7 @@ object DataDummy {
 
         tvShows.add(
             TvShows(
+                "tv_show_2",
                 "@drawable/poster_loki",
                 "Loki (2021)",
                 "Loki's time has come.",
@@ -145,6 +157,7 @@ object DataDummy {
         )
         tvShows.add(
             TvShows(
+                "tv_show_3",
                 "@drawable/poster_falcon_winter_soldier",
                 "The Falcon and the Winter Soldier (2021)",
                 "Honor the shield.",
@@ -156,6 +169,7 @@ object DataDummy {
 
         tvShows.add(
             TvShows(
+                "tv_show_4",
                 "@drawable/poster_wanda",
                 "WandaVision (2021)",
                 "Experience a new vision of reality.",
@@ -167,6 +181,7 @@ object DataDummy {
 
         tvShows.add(
             TvShows(
+                "tv_show_5",
                 "@drawable/poster_titan",
                 "Titans (2018)",
                 "Heroes will rise ... or Gotham will fall.",
@@ -178,6 +193,7 @@ object DataDummy {
 
         tvShows.add(
             TvShows(
+                "tv_show_6",
                 "@drawable/poster_flash",
                 "The Flash (2014)",
                 "The fastest man alive.",
@@ -189,6 +205,7 @@ object DataDummy {
 
         tvShows.add(
             TvShows(
+                "tv_show_7",
                 "@drawable/poster_monster_at_wotk",
                 "Monsters at Work (2021)",
                 "It's laughter we're after.",
@@ -200,6 +217,7 @@ object DataDummy {
 
         tvShows.add(
             TvShows(
+                "tv_show_8",
                 "@drawable/poster_arrow",
                 "Arrow (2012)",
                 "Heroes fall. Legends rise.",
@@ -211,6 +229,7 @@ object DataDummy {
 
         tvShows.add(
             TvShows(
+                "tv_show_9",
                 "@drawable/poster_money_heist",
                 "Money Heist (2017)",
                 "The perfect robbery.",
@@ -222,6 +241,7 @@ object DataDummy {
 
         tvShows.add(
             TvShows(
+                "tv_show_10",
                 "@drawable/poster_bad_batch",
                 "The Bad Batch (2021)",
                 "Experimental make their way through",

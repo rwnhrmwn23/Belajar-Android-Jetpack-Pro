@@ -1,4 +1,4 @@
-package com.onedev.dicoding.architecturecomponent
+package com.onedev.dicoding.architecturecomponent.ui.fragment.home
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

@@ -1,4 +1,4 @@
-package com.onedev.dicoding.architecturecomponent
+package com.onedev.dicoding.architecturecomponent.ui.fragment.splash
 
 import android.os.Bundle
 import android.os.Handler

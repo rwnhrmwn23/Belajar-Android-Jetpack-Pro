@@ -1,4 +1,4 @@
-package com.onedev.dicoding.architecturecomponent
+package com.onedev.dicoding.architecturecomponent.ui.fragment.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
+import com.onedev.dicoding.architecturecomponent.R
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sectionPagerAdapter = SectionPagerAdapter(activity as AppCompatActivity)
+        val sectionPagerAdapter = HomePagerAdapter(activity as AppCompatActivity)
         binding.viewPager.adapter = sectionPagerAdapter
         binding.viewPager.setPageTransformer(ZoomOutPageTransformer())
 

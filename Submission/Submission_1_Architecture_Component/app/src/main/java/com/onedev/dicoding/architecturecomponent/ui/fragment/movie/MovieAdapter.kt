@@ -1,11 +1,13 @@
-package com.onedev.dicoding.architecturecomponent
+package com.onedev.dicoding.architecturecomponent.ui.fragment.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.onedev.dicoding.architecturecomponent.databinding.ItemsMoviesBinding
 import com.onedev.dicoding.architecturecomponent.helper.ExtHelper.loadImageFromDrawable
 import com.onedev.dicoding.architecturecomponent.model.Movies
+import com.onedev.dicoding.architecturecomponent.ui.fragment.home.HomeFragmentDirections
 
 class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
@@ -36,11 +38,12 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         fun bind(movies: Movies) {
             with(binding) {
                 imgPoster.loadImageFromDrawable(movies.image)
-//                itemView.setOnClickListener {
-//                    val intent = Intent(itemView.context, DetailCourseActivity::class.java)
-//                    intent.putExtra(DetailCourseActivity.EXTRA_COURSE, course.courseId)
-//                    itemView.context.startActivity(intent)
-//                }
+                itemView.setOnClickListener {
+                    val toDetailFragment = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
+                    toDetailFragment.type = "Movie"
+                    toDetailFragment.typeId = movies.movie_id
+                    itemView.findNavController().navigate(toDetailFragment)
+                }
             }
         }
     }

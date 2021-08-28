@@ -1,4 +1,4 @@
-package com.onedev.dicoding.architecturecomponent
+package com.onedev.dicoding.architecturecomponent.ui.fragment.tvshow
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,13 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentTvShowBinding
-import com.onedev.dicoding.architecturecomponent.viewmodel.MainViewModel
+import com.onedev.dicoding.architecturecomponent.ui.fragment.movie.MovieViewModel
 
 class TvShowFragment : Fragment() {
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: TvShowViewModel
     private lateinit var tvShowAdapter: TvShowAdapter
     private var _binding: FragmentTvShowBinding? = null
     private val binding get() = _binding
@@ -30,7 +29,7 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tvShowAdapter = TvShowAdapter()
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TvShowViewModel::class.java)
 
         val tvShows = viewModel.getTvShows()
         binding?.rvResult.apply {

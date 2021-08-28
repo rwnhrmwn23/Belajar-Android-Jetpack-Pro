@@ -7,7 +7,7 @@
     tools:context=".ui.fragment.tvshow.TvShowFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_result"
+        android:id="@+id/rv_tv_show"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

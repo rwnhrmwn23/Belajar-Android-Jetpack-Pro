@@ -32,7 +32,7 @@ class MovieFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
         val movies = viewModel.getMovies()
-        binding?.rvResult.apply {
+        binding?.rvMovie.apply {
             movieAdapter.setMovies(movies)
             this?.setHasFixedSize(true)
             this?.layoutManager = GridLayoutManager(requireContext(), 3)

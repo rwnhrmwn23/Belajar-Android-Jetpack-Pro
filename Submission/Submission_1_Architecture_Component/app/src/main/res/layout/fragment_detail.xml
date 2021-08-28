@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="@+id/tv_option_information"
         app:layout_constraintTop_toBottomOf="@+id/tv_option_information" />
 
-    <com.borjabravo.readmoretextview.ReadMoreTextView
+    <TextView
         android:id="@+id/tv_overview"
         style="@style/TextViewSubTitle"
         android:layout_width="match_parent"

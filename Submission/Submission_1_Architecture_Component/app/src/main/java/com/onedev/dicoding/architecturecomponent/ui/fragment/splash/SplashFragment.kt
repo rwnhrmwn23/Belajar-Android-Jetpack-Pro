@@ -26,12 +26,12 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Looper.myLooper()?.let {
-            Handler(it).postDelayed({
-                val action = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
-                findNavController().navigate(action)
-            },2500)
-        }
+//        Looper.myLooper()?.let {
+//            Handler(it).postDelayed({
+//                val action = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
+//                findNavController().navigate(action)
+//            },2500)
+//        }
     }
 
     override fun onDestroyView() {

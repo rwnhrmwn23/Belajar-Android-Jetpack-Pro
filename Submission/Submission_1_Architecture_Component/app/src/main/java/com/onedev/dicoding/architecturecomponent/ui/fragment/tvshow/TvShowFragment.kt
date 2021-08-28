@@ -32,7 +32,7 @@ class TvShowFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(TvShowViewModel::class.java)
 
         val tvShows = viewModel.getTvShows()
-        binding?.rvResult.apply {
+        binding?.rvTvShow.apply {
             tvShowAdapter.setTvShows(tvShows)
             this?.setHasFixedSize(true)
             this?.layoutManager = LinearLayoutManager(requireContext())

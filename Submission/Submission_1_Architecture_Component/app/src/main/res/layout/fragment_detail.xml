@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.fragment.detail.DetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -26,99 +27,108 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ImageView
-        android:id="@+id/img_poster"
-        android:layout_width="100dp"
-        android:layout_height="120dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="8dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/poster_movie"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/tv_title"
-        style="@style/TextViewTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/dummy_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_poster"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
-    <TextView
-        android:id="@+id/tv_genre"
-        style="@style/TextViewSubTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/dummy_genre"
-        app:layout_constraintEnd_toEndOf="@+id/tv_title"
-        app:layout_constraintStart_toStartOf="@+id/tv_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
-
-    <TextView
-        android:id="@+id/tv_option_information"
-        style="@style/TextViewSubTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/dummy_release_date"
-        app:layout_constraintStart_toStartOf="@+id/tv_genre"
-        app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
-
-    <TextView
-        android:id="@+id/tv_duration"
-        style="@style/TextViewSubTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/dummy_duration"
-        app:layout_constraintStart_toStartOf="@+id/tv_option_information"
-        app:layout_constraintTop_toBottomOf="@+id/tv_option_information" />
-
-    <TextView
-        android:id="@+id/tv_overview"
-        style="@style/TextViewSubTitle"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/dummy_overview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/img_poster"
-        app:layout_constraintTop_toBottomOf="@+id/img_poster" />
+        android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?selectableItemBackground"
-        app:cardBackgroundColor="@color/colorSecondary"
-        app:cardCornerRadius="7dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_overview"
-        app:layout_constraintTop_toBottomOf="@+id/tv_overview">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_ios_share"
-            android:drawablePadding="5dp"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:text="@string/share"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/tv_option_information"
-            app:layout_constraintTop_toBottomOf="@+id/tv_option_information" />
+            <ImageView
+                android:id="@+id/img_poster"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="8dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/poster_movie"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
 
-    </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/TextViewTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/dummy_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_poster"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_genre"
+                style="@style/TextViewSubTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/dummy_genre"
+                app:layout_constraintEnd_toEndOf="@+id/tv_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+            <TextView
+                android:id="@+id/tv_option_information"
+                style="@style/TextViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/dummy_release_date"
+                app:layout_constraintStart_toStartOf="@+id/tv_genre"
+                app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
+
+            <TextView
+                android:id="@+id/tv_duration"
+                style="@style/TextViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/dummy_duration"
+                app:layout_constraintStart_toStartOf="@+id/tv_option_information"
+                app:layout_constraintTop_toBottomOf="@+id/tv_option_information" />
+
+            <TextView
+                android:id="@+id/tv_overview"
+                style="@style/TextViewSubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/dummy_overview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/img_poster"
+                app:layout_constraintTop_toBottomOf="@+id/img_poster" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?selectableItemBackground"
+                app:cardBackgroundColor="@color/colorSecondary"
+                app:cardCornerRadius="7dp"
+                app:layout_constraintStart_toStartOf="@+id/tv_overview"
+                app:layout_constraintTop_toBottomOf="@+id/tv_overview">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/share"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tv_option_information"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_option_information" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">Architecture Component</string>
     <string name="poster_movie">Poster Movie</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="movie_catalog">Movie Catalog</string>
     <string name="movie">Movie</string>
     <string name="tv_show">TV Show</string>
     <string name="dummy_title">Money Heist</string>
@@ -11,7 +8,6 @@
     <string name="dummy_release_date">07/16/2021</string>
     <string name="dummy_duration">2h 18m</string>
     <string name="dummy_overview">When LeBron and his young son Dom are trapped in a digital space by a rogue A.I., LeBron must get them home safe by leading Bugs, Lola Bunny and the whole gang of notoriously undisciplined Looney Tunes to victory over the A. Is digitized champions on the court. Its Tunes versus Goons in the highest-stakes challenge of his life</string>
-    <string name="spacing">|</string>
     <string name="share">Share</string>
     <string name="share_info">Yuk Nonton Film %s Di Bioskop Kesayangan Anda!</string>
 </resources>

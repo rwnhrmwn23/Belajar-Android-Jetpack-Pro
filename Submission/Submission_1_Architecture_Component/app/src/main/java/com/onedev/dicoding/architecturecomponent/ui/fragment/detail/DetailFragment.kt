@@ -1,7 +1,6 @@
 package com.onedev.dicoding.architecturecomponent.ui.fragment.detail
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +27,6 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }

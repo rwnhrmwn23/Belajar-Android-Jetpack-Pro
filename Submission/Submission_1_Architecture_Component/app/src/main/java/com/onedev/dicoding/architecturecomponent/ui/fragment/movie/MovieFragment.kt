@@ -20,7 +20,6 @@ class MovieFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentMovieBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }

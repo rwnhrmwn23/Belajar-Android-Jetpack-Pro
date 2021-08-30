@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
 import com.onedev.dicoding.architecturecomponent.di.Injection
+import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailViewModel
 import com.onedev.dicoding.architecturecomponent.ui.fragment.movie.MovieViewModel
 
 class ViewModelFactory private constructor(private val movieRepository: MovieRepository) :
@@ -24,9 +25,13 @@ class ViewModelFactory private constructor(private val movieRepository: MovieRep
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        when {
+        return when {
             modelClass.isAssignableFrom(MovieViewModel::class.java) -> {
-                return MovieViewModel(movieRepository) as T
+                MovieViewModel(movieRepository) as T
+            }
+
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(movieRepository) as T
             }
 
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)

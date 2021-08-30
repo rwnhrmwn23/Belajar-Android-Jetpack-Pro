@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,9 +25,26 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -53,20 +70,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/dummy_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_poster"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/dummy_title" />
 
             <TextView
                 android:id="@+id/tv_genre"
                 style="@style/TextViewSubTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/dummy_genre"
                 app:layout_constraintEnd_toEndOf="@+id/tv_title"
                 app:layout_constraintStart_toStartOf="@+id/tv_title"
-                app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:text="@string/dummy_genre" />
 
             <TextView
                 android:id="@+id/tv_option_information"
@@ -74,9 +91,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/dummy_release_date"
                 app:layout_constraintStart_toStartOf="@+id/tv_genre"
-                app:layout_constraintTop_toBottomOf="@+id/tv_genre" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_genre"
+                tools:text="@string/dummy_release_date" />
 
             <TextView
                 android:id="@+id/tv_duration"
@@ -84,9 +101,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/dummy_duration"
                 app:layout_constraintStart_toStartOf="@+id/tv_option_information"
-                app:layout_constraintTop_toBottomOf="@+id/tv_option_information" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_option_information"
+                tools:text="@string/dummy_duration" />
 
             <TextView
                 android:id="@+id/tv_overview"
@@ -94,10 +111,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="@string/dummy_overview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/img_poster"
-                app:layout_constraintTop_toBottomOf="@+id/img_poster" />
+                app:layout_constraintTop_toBottomOf="@+id/img_poster"
+                tools:text="@string/dummy_overview" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_share"
@@ -129,4 +146,4 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

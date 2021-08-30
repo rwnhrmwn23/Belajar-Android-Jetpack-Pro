@@ -4,7 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.onedev.dicoding.architecturecomponent.api.PICTURE_BASE_URL
+import com.onedev.dicoding.architecturecomponent.R
+import com.onedev.dicoding.architecturecomponent.data.api.PICTURE_BASE_URL
 import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieResponseResult
 import com.onedev.dicoding.architecturecomponent.databinding.ItemsMoviesBinding
 import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailActivity
@@ -40,7 +41,10 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
             with(binding) {
                 imgPoster.loadImage(PICTURE_BASE_URL+movies.poster_path)
                 itemView.setOnClickListener {
-                    itemView.context.startActivity(Intent(itemView.context, DetailActivity::class.java))
+                    val intent = Intent(itemView.context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_ID, movies.id)
+                    intent.putExtra(DetailActivity.EXTRA_TYPE, itemView.resources.getString(R.string.movie))
+                    itemView.context.startActivity(intent)
                 }
             }
         }

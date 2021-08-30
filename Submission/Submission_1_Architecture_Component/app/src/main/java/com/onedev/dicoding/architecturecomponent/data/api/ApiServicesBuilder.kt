@@ -1,4 +1,4 @@
-package com.onedev.dicoding.architecturecomponent.api
+package com.onedev.dicoding.architecturecomponent.data.api
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

@@ -2,12 +2,10 @@ package com.onedev.dicoding.architecturecomponent.ui.fragment.tvshow
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.onedev.dicoding.architecturecomponent.data.source.local.TvShows
 import com.onedev.dicoding.architecturecomponent.databinding.ItemsTvShowsBinding
-import com.onedev.dicoding.architecturecomponent.helper.ExtHelper.loadImageFromDrawable
-import com.onedev.dicoding.architecturecomponent.model.TvShows
-import com.onedev.dicoding.architecturecomponent.ui.fragment.home.HomeFragmentDirections
+import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.loadImageFromDrawable
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
@@ -42,10 +40,10 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                 tvTitleTvShow.text = tvShows.title
                 tvGenreTvShow.text = tvShows.genre
                 itemView.setOnClickListener {
-                    val toDetailFragment = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
-                    toDetailFragment.type = "TvShow"
-                    toDetailFragment.typeId = tvShows.tv_show_id
-                    itemView.findNavController().navigate(toDetailFragment)
+//                    val toDetailFragment = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
+//                    toDetailFragment.type = "TvShow"
+//                    toDetailFragment.typeId = tvShows.tv_show_id
+//                    itemView.findNavController().navigate(toDetailFragment)
                 }
             }
         }

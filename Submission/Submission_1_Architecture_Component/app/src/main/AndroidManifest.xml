@@ -12,7 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ArchitectureComponent">
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.activity.detail.DetailActivity"
+            android:exported="true"
+            android:parentActivityName=".ui.activity.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activity.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.activity.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

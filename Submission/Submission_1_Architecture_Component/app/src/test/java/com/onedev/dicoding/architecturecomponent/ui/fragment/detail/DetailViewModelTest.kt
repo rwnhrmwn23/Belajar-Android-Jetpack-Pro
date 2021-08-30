@@ -1,6 +1,6 @@
 package com.onedev.dicoding.architecturecomponent.ui.fragment.detail
 
-import com.onedev.dicoding.architecturecomponent.helper.DataDummy
+import com.onedev.dicoding.architecturecomponent.utils.DataDummy
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test

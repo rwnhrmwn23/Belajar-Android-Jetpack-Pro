@@ -8,8 +8,8 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.onedev.dicoding.architecturecomponent.R
-import com.onedev.dicoding.architecturecomponent.helper.DataDummy
-import com.onedev.dicoding.architecturecomponent.ui.activity.MainActivity
+import com.onedev.dicoding.architecturecomponent.utils.DataDummy
+import com.onedev.dicoding.architecturecomponent.ui.activity.main.MainActivity
 import org.junit.Before
 import org.junit.Test
 

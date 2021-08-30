@@ -1,4 +1,4 @@
-package com.onedev.dicoding.architecturecomponent.model
+package com.onedev.dicoding.architecturecomponent.data.source.local
 
 data class Movies(
     val movie_id: String,

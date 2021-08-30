@@ -1,19 +1,20 @@
 package com.onedev.dicoding.architecturecomponent.ui.fragment.movie
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.onedev.dicoding.architecturecomponent.api.PICTURE_BASE_URL
+import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieResponseResult
 import com.onedev.dicoding.architecturecomponent.databinding.ItemsMoviesBinding
-import com.onedev.dicoding.architecturecomponent.helper.ExtHelper.loadImageFromDrawable
-import com.onedev.dicoding.architecturecomponent.model.Movies
-import com.onedev.dicoding.architecturecomponent.ui.fragment.home.HomeFragmentDirections
+import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailActivity
+import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.loadImage
 
 class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var listMovie = ArrayList<Movies>()
+    private var listMovie = ArrayList<MovieResponseResult>()
 
-    fun setMovies(movies: List<Movies>?) {
+    fun setMovies(movies: List<MovieResponseResult>?) {
         if (movies == null) return
         this.listMovie.clear()
         this.listMovie.addAll(movies)
@@ -35,14 +36,11 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder(private val binding: ItemsMoviesBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movies: Movies) {
+        fun bind(movies: MovieResponseResult) {
             with(binding) {
-                imgPoster.loadImageFromDrawable(movies.image)
+                imgPoster.loadImage(PICTURE_BASE_URL+movies.poster_path)
                 itemView.setOnClickListener {
-                    val toDetailFragment = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
-                    toDetailFragment.type = "Movie"
-                    toDetailFragment.typeId = movies.movie_id
-                    itemView.findNavController().navigate(toDetailFragment)
+                    itemView.context.startActivity(Intent(itemView.context, DetailActivity::class.java))
                 }
             }
         }

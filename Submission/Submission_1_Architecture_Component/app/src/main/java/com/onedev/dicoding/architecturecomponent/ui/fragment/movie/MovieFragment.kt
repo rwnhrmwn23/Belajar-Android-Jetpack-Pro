@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.onedev.dicoding.architecturecomponent.BuildConfig
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentMovieBinding
+import com.onedev.dicoding.architecturecomponent.viewmodel.ViewModelFactory
 
 class MovieFragment : Fragment() {
     private lateinit var viewModel: MovieViewModel
+    private lateinit var factory: ViewModelFactory
     private lateinit var movieAdapter: MovieAdapter
 
     private var _binding: FragmentMovieBinding? = null
@@ -28,14 +31,20 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         movieAdapter = MovieAdapter()
-        viewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+        factory = ViewModelFactory.getInstance(requireActivity())
+        viewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
-        val movies = viewModel.getMovies()
-        binding?.rvMovie.apply {
+        binding?.progressBar?.visibility = View.VISIBLE
+        viewModel.getPopularMovie(BuildConfig.API_KEY, 1).observe(viewLifecycleOwner, { movies ->
+            binding?.progressBar?.visibility = View.GONE
             movieAdapter.setMovies(movies)
-            this?.setHasFixedSize(true)
-            this?.layoutManager = GridLayoutManager(requireContext(), 3)
-            this?.adapter = movieAdapter
+            movieAdapter.notifyDataSetChanged()
+        })
+
+        binding?.rvMovie?.apply {
+            setHasFixedSize(true)
+            layoutManager = GridLayoutManager(requireContext(), 3)
+            adapter = movieAdapter
         }
 
     }

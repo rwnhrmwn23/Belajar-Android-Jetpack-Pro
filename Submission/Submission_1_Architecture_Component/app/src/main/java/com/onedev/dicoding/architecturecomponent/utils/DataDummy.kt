@@ -1,7 +1,7 @@
-package com.onedev.dicoding.architecturecomponent.helper
+package com.onedev.dicoding.architecturecomponent.utils
 
-import com.onedev.dicoding.architecturecomponent.model.Movies
-import com.onedev.dicoding.architecturecomponent.model.TvShows
+import com.onedev.dicoding.architecturecomponent.data.source.local.Movies
+import com.onedev.dicoding.architecturecomponent.data.source.local.TvShows
 
 object DataDummy {
     fun generateDataDummyMovies(): List<Movies> {

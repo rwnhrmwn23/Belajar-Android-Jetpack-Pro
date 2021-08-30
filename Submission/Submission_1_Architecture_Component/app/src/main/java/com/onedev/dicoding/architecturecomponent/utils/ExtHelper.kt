@@ -1,4 +1,4 @@
-package com.onedev.dicoding.architecturecomponent.helper
+package com.onedev.dicoding.architecturecomponent.utils
 
 import android.graphics.Typeface
 import android.widget.ImageView
@@ -12,6 +12,12 @@ object ExtHelper {
         val res = ContextCompat.getDrawable(context, imageResource)
         Glide.with(context)
             .load(res)
+            .into(this)
+    }
+
+    fun ImageView.loadImage(url: String) {
+        Glide.with(context)
+            .load(url)
             .into(this)
     }
 

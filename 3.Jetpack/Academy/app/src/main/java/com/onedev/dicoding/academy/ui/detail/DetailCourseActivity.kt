@@ -12,6 +12,7 @@ import com.onedev.dicoding.academy.databinding.ActivityDetailCourseBinding
 import com.onedev.dicoding.academy.databinding.ContentDetailCourseBinding
 import com.onedev.dicoding.academy.ui.course.CourseReaderActivity
 import com.onedev.dicoding.academy.utils.ExtClass.loadImageWithTransform
+import com.onedev.dicoding.academy.viewmodel.ViewModelFactory
 
 class DetailCourseActivity : AppCompatActivity() {
 
@@ -29,7 +30,8 @@ class DetailCourseActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val viewModel = ViewModelProvider(this).get(DetailCourseViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
 
         val detailCourseAdapter = DetailCourseAdapter()

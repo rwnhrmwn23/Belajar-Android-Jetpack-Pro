@@ -10,6 +10,7 @@ import com.onedev.dicoding.academy.data.ContentEntity
 import com.onedev.dicoding.academy.data.ModuleEntity
 import com.onedev.dicoding.academy.databinding.FragmentModuleContentBinding
 import com.onedev.dicoding.academy.ui.course.CourseReaderViewModel
+import com.onedev.dicoding.academy.viewmodel.ViewModelFactory
 
 class ModuleContentFragment : Fragment() {
     private var _binding: FragmentModuleContentBinding? = null
@@ -33,7 +34,8 @@ class ModuleContentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val viewModel = ViewModelProvider(requireActivity()).get(CourseReaderViewModel::class.java)
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(requireActivity(),factory)[CourseReaderViewModel::class.java]
             val module = viewModel.getSelectedModule()
             populateWebView(module)
         }

@@ -12,6 +12,7 @@ import com.onedev.dicoding.academy.R
 import com.onedev.dicoding.academy.data.CourseEntity
 import com.onedev.dicoding.academy.databinding.FragmentBookmarkBinding
 import com.onedev.dicoding.academy.utils.DataDummy
+import com.onedev.dicoding.academy.viewmodel.ViewModelFactory
 
 class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
     private var _binding: FragmentBookmarkBinding? = null
@@ -30,7 +31,8 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val viewModel = ViewModelProvider(this).get(BookmarkViewModel::class.java)
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
             val courses = viewModel.getBookmarks()
 
             val adapter = BookmarkAdapter(this)

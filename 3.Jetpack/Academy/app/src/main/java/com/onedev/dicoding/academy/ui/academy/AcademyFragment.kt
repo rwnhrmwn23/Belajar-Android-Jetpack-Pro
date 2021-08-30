@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onedev.dicoding.academy.databinding.FragmentAcademyBinding
 import com.onedev.dicoding.academy.utils.DataDummy
+import com.onedev.dicoding.academy.viewmodel.ViewModelFactory
 
 class AcademyFragment : Fragment() {
     private var _binding: FragmentAcademyBinding? = null
@@ -27,7 +28,8 @@ class AcademyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val viewModel = ViewModelProvider(this).get(AcademyViewModel::class.java)
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[AcademyViewModel::class.java]
             val course = viewModel.getCourse()
 
             val adapter = AcademyAdapter()

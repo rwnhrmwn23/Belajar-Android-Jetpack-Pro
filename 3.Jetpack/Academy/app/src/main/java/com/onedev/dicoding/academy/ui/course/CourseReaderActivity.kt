@@ -7,6 +7,7 @@ import com.onedev.dicoding.academy.R
 import com.onedev.dicoding.academy.ui.reader.CourseReaderCallback
 import com.onedev.dicoding.academy.ui.reader.content.ModuleContentFragment
 import com.onedev.dicoding.academy.ui.reader.list.ModuleListFragment
+import com.onedev.dicoding.academy.viewmodel.ViewModelFactory
 
 class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
 
@@ -18,7 +19,8 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_reader)
 
-        val viewModel = ViewModelProvider(this).get(CourseReaderViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[CourseReaderViewModel::class.java]
 
         val bundle = intent.extras
         if (bundle != null) {

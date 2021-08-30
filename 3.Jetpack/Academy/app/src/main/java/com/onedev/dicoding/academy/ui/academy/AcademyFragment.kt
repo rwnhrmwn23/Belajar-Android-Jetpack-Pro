@@ -1,5 +1,7 @@
 package com.onedev.dicoding.academy.ui.academy
 
+import android.annotation.SuppressLint
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,21 +26,26 @@ class AcademyFragment : Fragment() {
         return binding?.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[AcademyViewModel::class.java]
-            val course = viewModel.getCourse()
+            val academyAdapter = AcademyAdapter()
 
-            val adapter = AcademyAdapter()
-            adapter.setCourses(course)
+            binding?.progressBar?.visibility = View.VISIBLE
+            viewModel.getCourse().observe(viewLifecycleOwner, {
+                binding?.progressBar?.visibility = View.GONE
+                academyAdapter.setCourses(it)
+                academyAdapter.notifyDataSetChanged()
+            })
 
-            with(binding?.rvAcademy) {
-                this?.layoutManager = LinearLayoutManager(context)
-                this?.setHasFixedSize(true)
-                this?.adapter = adapter
+            binding?.rvAcademy?.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = academyAdapter
             }
         }
 

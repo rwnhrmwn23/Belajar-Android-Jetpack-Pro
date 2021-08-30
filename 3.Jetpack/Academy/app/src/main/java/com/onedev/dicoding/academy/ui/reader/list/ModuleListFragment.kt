@@ -45,20 +45,22 @@ class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener 
         val factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
 
+        binding?.progressBar?.visibility = View.VISIBLE
         adapter = ModuleListAdapter(this)
-        populateRecyclerView(viewModel.getModules())
+        viewModel.getModules().observe(viewLifecycleOwner, {
+            populateRecyclerView(it)
+        })
     }
 
     private fun populateRecyclerView(modules: List<ModuleEntity>) {
-        with(binding) {
-            this?.progressBar?.visibility = View.GONE
-
-            adapter.setModules(modules)
-            this?.rvModule?.layoutManager = LinearLayoutManager(context)
-            this?.rvModule?.setHasFixedSize(true)
-            this?.rvModule?.adapter = adapter
+        binding?.apply {
             val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-            this?.rvModule?.addItemDecoration(dividerItemDecoration)
+            progressBar.visibility = View.GONE
+            adapter.setModules(modules)
+            rvModule.setHasFixedSize(true)
+            rvModule.layoutManager = LinearLayoutManager(context)
+            rvModule.adapter = adapter
+            rvModule.addItemDecoration(dividerItemDecoration)
         }
     }
 

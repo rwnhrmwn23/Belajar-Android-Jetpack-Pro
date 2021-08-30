@@ -1,5 +1,6 @@
 package com.onedev.dicoding.academy.ui.bookmark
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,21 +28,26 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
         return binding?.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
-            val courses = viewModel.getBookmarks()
 
-            val adapter = BookmarkAdapter(this)
-            adapter.setCourses(courses)
+            binding?.progressBar?.visibility = View.VISIBLE
+            val bookmarkAdapter = BookmarkAdapter(this)
+            viewModel.getBookmarks().observe(viewLifecycleOwner, {
+                binding?.progressBar?.visibility = View.GONE
+                bookmarkAdapter.setCourses(it)
+                bookmarkAdapter.notifyDataSetChanged()
+            })
 
-            with(binding?.rvBookmark) {
-                this?.layoutManager = LinearLayoutManager(context)
-                this?.setHasFixedSize(true)
-                this?.adapter = adapter
+            binding?.rvBookmark?.apply {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                adapter = bookmarkAdapter
             }
         }
 

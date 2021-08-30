@@ -1,7 +1,9 @@
 package com.onedev.dicoding.academy.ui.detail
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -22,6 +24,7 @@ class DetailCourseActivity : AppCompatActivity() {
 
     private lateinit var detailContentBinding: ContentDetailCourseBinding
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityDetailCourseBinding.inflate(layoutInflater)
@@ -33,16 +36,25 @@ class DetailCourseActivity : AppCompatActivity() {
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
-
         val detailCourseAdapter = DetailCourseAdapter()
         val extras = intent.extras
         if (extras != null) {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.content.visibility = View.INVISIBLE
+
                 viewModel.setSelectedCourse(courseId)
-                val modules = viewModel.getModules()
-                detailCourseAdapter.setModule(modules)
-                populateCourse(viewModel.getCourse())
+                viewModel.getModules().observe(this, {
+                    binding.progressBar.visibility = View.GONE
+                    binding.content.visibility = View.VISIBLE
+
+                    detailCourseAdapter.setModule(it)
+                    detailCourseAdapter.notifyDataSetChanged()
+                })
+                viewModel.getCourse().observe(this, {
+                    populateCourse(it)
+                })
             }
         }
 

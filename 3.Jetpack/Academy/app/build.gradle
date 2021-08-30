@@ -52,6 +52,8 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Testing
+    testImplementation "androidx.arch.core:core-testing:$androidCoreTestVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
     testImplementation "junit:junit:$junitVersion"

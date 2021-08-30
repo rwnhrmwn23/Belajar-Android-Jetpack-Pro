@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.onedev.dicoding.architecturecomponent.data.source.remote.RemoteDataSource
 import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieDetailResponse
 import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieResponseResult
+import com.onedev.dicoding.architecturecomponent.data.source.remote.response.TvShowDetailResponse
+import com.onedev.dicoding.architecturecomponent.data.source.remote.response.TvShowResponseResult
 
 class MovieRepository private constructor(private val remoteDataSource: RemoteDataSource) :
     MovieDataSource {
@@ -38,6 +40,26 @@ class MovieRepository private constructor(private val remoteDataSource: RemoteDa
             }
         })
         return movieDetails
+    }
+
+    override fun getPopularTvShow(apiKey: String, page: Int): LiveData<List<TvShowResponseResult>> {
+        val tvShowResults = MutableLiveData<List<TvShowResponseResult>>()
+        remoteDataSource.getPopularTvShow(apiKey, page, object : RemoteDataSource.LoadPopularTvShowCallback {
+            override fun onAllPopularTvShowReceived(listTvShowResponseResult: List<TvShowResponseResult>) {
+                tvShowResults.postValue(listTvShowResponseResult)
+            }
+        })
+        return tvShowResults
+    }
+
+    override fun getDetailTvShow(tvShow: Int, apiKey: String): LiveData<TvShowDetailResponse> {
+        val tvShowDetails = MutableLiveData<TvShowDetailResponse>()
+        remoteDataSource.getDetailTvShow(tvShow, apiKey, object : RemoteDataSource.LoadDetailTvShowCallback {
+            override fun onAllDetailTvShowReceived(tvShowDetailResponse: TvShowDetailResponse) {
+                tvShowDetails.postValue(tvShowDetailResponse)
+            }
+        })
+        return tvShowDetails
     }
 
 }

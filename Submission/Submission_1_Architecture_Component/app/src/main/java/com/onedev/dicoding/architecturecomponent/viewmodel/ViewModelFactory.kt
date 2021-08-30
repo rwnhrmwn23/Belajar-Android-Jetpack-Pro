@@ -7,6 +7,7 @@ import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
 import com.onedev.dicoding.architecturecomponent.di.Injection
 import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailViewModel
 import com.onedev.dicoding.architecturecomponent.ui.fragment.movie.MovieViewModel
+import com.onedev.dicoding.architecturecomponent.ui.fragment.tvshow.TvShowViewModel
 
 class ViewModelFactory private constructor(private val movieRepository: MovieRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -32,6 +33,10 @@ class ViewModelFactory private constructor(private val movieRepository: MovieRep
 
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(movieRepository) as T
+            }
+
+            modelClass.isAssignableFrom(TvShowViewModel::class.java) -> {
+                TvShowViewModel(movieRepository) as T
             }
 
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)

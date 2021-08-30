@@ -2,6 +2,8 @@ package com.onedev.dicoding.architecturecomponent.data.source.remote
 
 import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieDetailResponse
 import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieResponseResult
+import com.onedev.dicoding.architecturecomponent.data.source.remote.response.TvShowDetailResponse
+import com.onedev.dicoding.architecturecomponent.data.source.remote.response.TvShowResponseResult
 import com.onedev.dicoding.architecturecomponent.utils.JsonHelper
 
 class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
@@ -35,12 +37,37 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
         })
     }
 
+    fun getPopularTvShow(apiKey: String, page: Int, callback: LoadPopularTvShowCallback) {
+        jsonHelper.getPopularTvShow(apiKey, page, object : JsonHelper.GetPopularTvShowCallback {
+            override fun getPopularTvShowCallback(listTvShowResponse: List<TvShowResponseResult>) {
+                callback.onAllPopularTvShowReceived(listTvShowResponse)
+            }
+        })
+    }
+
+    fun getDetailTvShow(tvShow: Int, apiKey: String, callback: LoadDetailTvShowCallback) {
+        jsonHelper.getDetailTvShow(tvShow, apiKey, object : JsonHelper.GetDetailTvShowCallback {
+            override fun getDetailTvShowCallback(tvShowDetailResponse: TvShowDetailResponse) {
+                callback.onAllDetailTvShowReceived(tvShowDetailResponse)
+            }
+
+        })
+    }
+
     interface LoadPopularMovieCallback {
         fun onAllPopularMovieReceived(listMovieResponseResult: List<MovieResponseResult>)
     }
 
     interface LoadDetailMovieCallback {
         fun onAllDetailMovieReceived(movieDetailResponse: MovieDetailResponse)
+    }
+
+    interface LoadPopularTvShowCallback {
+        fun onAllPopularTvShowReceived(listTvShowResponseResult: List<TvShowResponseResult>)
+    }
+
+    interface LoadDetailTvShowCallback {
+        fun onAllDetailTvShowReceived(tvShowDetailResponse: TvShowDetailResponse)
     }
 
 }

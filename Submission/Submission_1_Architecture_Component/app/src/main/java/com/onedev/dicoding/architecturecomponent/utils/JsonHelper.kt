@@ -3,10 +3,7 @@ package com.onedev.dicoding.architecturecomponent.utils
 import android.content.Context
 import android.util.Log
 import com.onedev.dicoding.architecturecomponent.data.api.ApiServicesBuilder
-import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieDetailResponse
-import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieResponse
-import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieResponseResult
-import kotlinx.coroutines.DelicateCoroutinesApi
+import com.onedev.dicoding.architecturecomponent.data.source.remote.response.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,7 +12,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-@DelicateCoroutinesApi
 class JsonHelper(private val context: Context) {
 
     companion object {
@@ -77,12 +73,75 @@ class JsonHelper(private val context: Context) {
         }
     }
 
+    fun getPopularTvShow(apiKey: String, page: Int, callback: GetPopularTvShowCallback) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                ApiServicesBuilder.instance.getPopularTvShow(apiKey, page)
+                    .enqueue(object : Callback<TvShowResponse> {
+                        override fun onResponse(
+                            call: Call<TvShowResponse>,
+                            response: Response<TvShowResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                val results = response.body()!!.results
+                                if (results.isNotEmpty()) {
+                                    callback.getPopularTvShowCallback(results)
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<TvShowResponse>, t: Throwable) {
+                            Log.d(TAG, "onFailure: ${t.localizedMessage}")
+                        }
+
+                    })
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun getDetailTvShow(tvShow: Int, apiKey: String, callback: GetDetailTvShowCallback) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                ApiServicesBuilder.instance.getDetailTvShow(tvShow, apiKey)
+                    .enqueue(object : Callback<TvShowDetailResponse> {
+                        override fun onResponse(
+                            call: Call<TvShowDetailResponse>,
+                            response: Response<TvShowDetailResponse>
+                        ) {
+                            if (response.isSuccessful) {
+                                response.body()?.let {
+                                    callback.getDetailTvShowCallback(it)
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<TvShowDetailResponse>, t: Throwable) {
+                            Log.d(TAG, "onFailure: ${t.localizedMessage}")
+                        }
+
+                    })
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     interface GetPopularMovieCallback {
         fun getPopularMovieCallback(listMovieResponseResult: List<MovieResponseResult>)
     }
 
     interface GetDetailMovieCallback {
         fun getDetailMovieCallback(movieDetailResponse: MovieDetailResponse)
+    }
+
+    interface GetPopularTvShowCallback {
+        fun getPopularTvShowCallback(listTvShowResponse: List<TvShowResponseResult>)
+    }
+
+    interface GetDetailTvShowCallback {
+        fun getDetailTvShowCallback(tvShowDetailResponse: TvShowDetailResponse)
     }
 
 }

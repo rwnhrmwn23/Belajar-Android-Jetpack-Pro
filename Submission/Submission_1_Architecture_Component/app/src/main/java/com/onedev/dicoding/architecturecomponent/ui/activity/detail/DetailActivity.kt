@@ -9,8 +9,10 @@ import com.onedev.dicoding.architecturecomponent.BuildConfig
 import com.onedev.dicoding.architecturecomponent.R
 import com.onedev.dicoding.architecturecomponent.data.api.PICTURE_BASE_URL
 import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieDetailResponse
+import com.onedev.dicoding.architecturecomponent.data.source.remote.response.TvShowDetailResponse
 import com.onedev.dicoding.architecturecomponent.databinding.ActivityDetailBinding
 import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.loadImage
+import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.setStyleToItalic
 import com.onedev.dicoding.architecturecomponent.viewmodel.ViewModelFactory
 
 class DetailActivity : AppCompatActivity() {
@@ -32,21 +34,20 @@ class DetailActivity : AppCompatActivity() {
         val extras = intent.extras
         if (extras != null) {
             loading(true)
-            val movieId = extras.getInt(EXTRA_ID, 0)
+            val id = extras.getInt(EXTRA_ID, 0)
             when (extras.getString(EXTRA_TYPE)) {
                 getString(R.string.movie) -> {
-                    viewModel.getDetailMovie(movieId, BuildConfig.API_KEY).observe(this, { movie ->
+                    viewModel.getDetailMovie(id, BuildConfig.API_KEY).observe(this, { movie ->
                         populateViewMovie(movie)
                     })
-
-                    loading(false)
                 }
                 else -> {
-//                    viewModel.getDetailMovie(movieId, BuildConfig.API_KEY).observe(this, { movie ->
-//                        populateViewMovie(movie)
-//                    })
+                    viewModel.getDetailTvShow(id, BuildConfig.API_KEY).observe(this, { tvShow ->
+                        populateViewTvShow(tvShow)
+                    })
                 }
             }
+            loading(false)
         }
 
         binding?.cardShare?.setOnClickListener {
@@ -71,9 +72,9 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun populateViewMovie(movieDetail: MovieDetailResponse) {
-        supportActionBar?.title = movieDetail.title
-
         title = movieDetail.title
+        supportActionBar?.title = title
+
         binding?.apply {
             imgPoster.loadImage(PICTURE_BASE_URL+movieDetail.poster_path)
             tvTitle.text = movieDetail.title
@@ -86,20 +87,22 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-//    private fun populateViewTvShow(tvShowDetail: TvShows) {
-//        (activity as AppCompatActivity).supportActionBar?.title = tvShowDetail.title
-//
-//        title = tvShowDetail.title
-//        binding?.apply {
-//            tvOptionInformation.setStyleToItalic()
-//            imgPoster.loadImageFromDrawable(tvShowDetail.image)
-//            tvTitle.text = tvShowDetail.title
-//            tvOptionInformation.text = tvShowDetail.tagline
-//            tvGenre.text = tvShowDetail.genre
-//            tvDuration.text = tvShowDetail.duration
-//            tvOverview.text = tvShowDetail.overview
-//        }
-//    }
+    private fun populateViewTvShow(tvShowDetail: TvShowDetailResponse) {
+        title = tvShowDetail.name
+        supportActionBar?.title = title
+
+        binding?.apply {
+            tvOptionInformation.setStyleToItalic()
+            imgPoster.loadImage(PICTURE_BASE_URL+tvShowDetail.poster_path)
+            tvTitle.text = tvShowDetail.name
+            tvOptionInformation.text = tvShowDetail.tagline
+            for (i in tvShowDetail.genres) {
+                tvGenre.text = i.name
+            }
+            tvOverview.text = tvShowDetail.overview
+            tvDuration.visibility = View.INVISIBLE
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

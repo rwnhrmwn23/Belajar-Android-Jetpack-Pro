@@ -1,17 +1,21 @@
 package com.onedev.dicoding.architecturecomponent.ui.fragment.tvshow
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.onedev.dicoding.architecturecomponent.data.source.local.TvShows
+import com.onedev.dicoding.architecturecomponent.R
+import com.onedev.dicoding.architecturecomponent.data.api.PICTURE_BASE_URL
+import com.onedev.dicoding.architecturecomponent.data.source.remote.response.TvShowResponseResult
 import com.onedev.dicoding.architecturecomponent.databinding.ItemsTvShowsBinding
-import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.loadImageFromDrawable
+import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailActivity
+import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.loadImage
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
-    private var listTvShow = ArrayList<TvShows>()
+    private var listTvShow = ArrayList<TvShowResponseResult>()
 
-    fun setTvShows(tvShows: List<TvShows>?) {
+    fun setTvShows(tvShows: List<TvShowResponseResult>?) {
         if (tvShows == null) return
         this.listTvShow.clear()
         this.listTvShow.addAll(tvShows)
@@ -34,16 +38,16 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
     class TvShowViewHolder(private val binding: ItemsTvShowsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(tvShows: TvShows) {
+        fun bind(tvShows: TvShowResponseResult) {
             with(binding) {
-                imgPoster.loadImageFromDrawable(tvShows.image)
-                tvTitleTvShow.text = tvShows.title
-                tvGenreTvShow.text = tvShows.genre
+                imgPoster.loadImage(PICTURE_BASE_URL+tvShows.poster_path)
+                tvTitleTvShow.text = tvShows.name
+                tvVoteAverage.text = tvShows.vote_average.toString()
                 itemView.setOnClickListener {
-//                    val toDetailFragment = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
-//                    toDetailFragment.type = "TvShow"
-//                    toDetailFragment.typeId = tvShows.tv_show_id
-//                    itemView.findNavController().navigate(toDetailFragment)
+                    val intent = Intent(itemView.context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_ID, tvShows.id)
+                    intent.putExtra(DetailActivity.EXTRA_TYPE, itemView.resources.getString(R.string.tv_show))
+                    itemView.context.startActivity(intent)
                 }
             }
         }

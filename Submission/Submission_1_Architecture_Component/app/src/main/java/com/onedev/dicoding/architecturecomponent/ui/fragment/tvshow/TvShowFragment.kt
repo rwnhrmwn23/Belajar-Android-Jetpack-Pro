@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.onedev.dicoding.architecturecomponent.BuildConfig
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentTvShowBinding
+import com.onedev.dicoding.architecturecomponent.viewmodel.ViewModelFactory
 
 class TvShowFragment : Fragment() {
+    private lateinit var factory: ViewModelFactory
     private lateinit var viewModel: TvShowViewModel
     private lateinit var tvShowAdapter: TvShowAdapter
     private var _binding: FragmentTvShowBinding? = null
@@ -27,14 +30,20 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tvShowAdapter = TvShowAdapter()
-        viewModel = ViewModelProvider(this).get(TvShowViewModel::class.java)
+        factory = ViewModelFactory.getInstance(requireActivity())
+        viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
-        val tvShows = viewModel.getTvShows()
-        binding?.rvTvShow.apply {
-            tvShowAdapter.setTvShows(tvShows)
-            this?.setHasFixedSize(true)
-            this?.layoutManager = LinearLayoutManager(requireContext())
-            this?.adapter = tvShowAdapter
+        binding?.progressBar?.visibility = View.VISIBLE
+        viewModel.getPopularTvShow(BuildConfig.API_KEY, 1).observe(viewLifecycleOwner, {
+            binding?.progressBar?.visibility = View.GONE
+            tvShowAdapter.setTvShows(it)
+            tvShowAdapter.notifyDataSetChanged()
+        })
+
+        binding?.rvTvShow?.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = tvShowAdapter
         }
 
     }

@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.onedev.dicoding.architecturecomponent.R
 
 object ExtHelper {
     fun ImageView.loadImageFromDrawable(resDrawable: String) {
@@ -18,6 +19,8 @@ object ExtHelper {
     fun ImageView.loadImage(url: String) {
         Glide.with(context)
             .load(url)
+            .placeholder(R.drawable.ic_loading)
+            .error(R.drawable.ic_error)
             .into(this)
     }
 

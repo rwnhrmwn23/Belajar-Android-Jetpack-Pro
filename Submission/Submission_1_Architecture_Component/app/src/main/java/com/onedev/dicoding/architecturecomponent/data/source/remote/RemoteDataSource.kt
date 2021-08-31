@@ -109,7 +109,6 @@ class RemoteDataSource {
                     Log.d(TAG, "onFailure: ${t.localizedMessage}")
                     EspressoIdlingResource.decrement()
                 }
-
             })
     }
 

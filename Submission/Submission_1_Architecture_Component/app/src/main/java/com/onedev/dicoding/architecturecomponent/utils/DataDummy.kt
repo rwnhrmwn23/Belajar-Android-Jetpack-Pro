@@ -78,23 +78,20 @@ object DataDummy {
 
     fun getDetailTvShow(): TvShowDetailEntity {
         return TvShowDetailEntity(
-            listOf("Action", "Adventure", "Drama", "Fantasy"),
+            listOf("Animation", "Action & Adventure", "Sci-Fi & Fantasy"),
             531242,
-            "The Suicide Squad",
-            "Supervillains Harley Quinn, Bloodsport, Peacemaker and a collection of nutty cons at Belle Reve prison join the super-secret, super-shady Task Force X as they are dropped off at the remote, enemy-infused island of Corto Maltese.",
-            3692.281,
-            "/gL8myjGc2qrmqVosyGm5CWTir9A.jpg",
+            "What If...?",
+            "Taking inspiration from the comic books of the same name, each episode explores a pivotal moment from the Marvel Cinematic Universe and turns it on its head, leading the audience into uncharted territory.",
+            1622.843,
+            "/lztz5XBMG1x6Y5ubz7CxfPFsAcW.jpg",
             listOf(
-                "DC Entertainment",
-                "DC Films",
-                "Atlas Entertainment",
-                "DC Comics",
-                "The Safran Company",
-                "Warner Bros. Pictures"
+                "Marvel Studios",
+                "Blue Spirit",
+                "Squeeze"
             ),
-            "2021-07-28",
-            "They're dying to save the world.",
-            8.0
+            "Returning Series",
+            "One question changes everything.",
+            8.6,
         )
     }
 }

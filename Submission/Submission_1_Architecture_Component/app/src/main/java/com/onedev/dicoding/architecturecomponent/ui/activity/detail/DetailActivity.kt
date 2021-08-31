@@ -92,7 +92,7 @@ class DetailActivity : AppCompatActivity() {
         binding?.apply {
             tvOptionInformation.setStyleToItalic()
             imgPoster.loadImage(PICTURE_BASE_URL + tvShowDetail.poster_path)
-            tvTitle.text = title
+            tvTitle.text = tvShowDetail.name
             tvOptionInformation.text = tvShowDetail.tagline
             tvGenre.text = tvShowDetail.genres.toString()
             tvOverview.text = tvShowDetail.overview

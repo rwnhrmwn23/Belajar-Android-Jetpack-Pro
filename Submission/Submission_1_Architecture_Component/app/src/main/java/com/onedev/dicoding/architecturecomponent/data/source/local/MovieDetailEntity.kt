@@ -1,9 +1,5 @@
 package com.onedev.dicoding.architecturecomponent.data.source.local
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class MovieDetailEntity(
     val genres: List<String>,
     val id: Int,
@@ -17,4 +13,4 @@ data class MovieDetailEntity(
     val tagline: String,
     val title: String? = null,
     val vote_average: Double
-) : Parcelable
+)

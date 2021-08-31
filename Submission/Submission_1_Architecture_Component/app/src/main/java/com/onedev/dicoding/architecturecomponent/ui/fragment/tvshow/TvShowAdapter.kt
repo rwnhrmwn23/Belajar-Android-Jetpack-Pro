@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.onedev.dicoding.architecturecomponent.R
 import com.onedev.dicoding.architecturecomponent.data.api.PICTURE_BASE_URL
-import com.onedev.dicoding.architecturecomponent.data.source.remote.response.TvShowResponseResult
+import com.onedev.dicoding.architecturecomponent.data.source.local.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.databinding.ItemsTvShowsBinding
 import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailActivity
 import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.loadImage
 
 class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
-    private var listTvShow = ArrayList<TvShowResponseResult>()
+    private var listTvShow = ArrayList<TvShowEntity>()
 
-    fun setTvShows(tvShows: List<TvShowResponseResult>?) {
+    fun setTvShows(tvShows: List<TvShowEntity>?) {
         if (tvShows == null) return
         this.listTvShow.clear()
         this.listTvShow.addAll(tvShows)
@@ -38,11 +38,11 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
 
     class TvShowViewHolder(private val binding: ItemsTvShowsBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(tvShows: TvShowResponseResult) {
+        fun bind(tvShows: TvShowEntity) {
             with(binding) {
-                imgPoster.loadImage(PICTURE_BASE_URL+tvShows.poster_path)
+                imgPoster.loadImage(PICTURE_BASE_URL+tvShows.posterPath)
                 tvTitleTvShow.text = tvShows.name
-                tvVoteAverage.text = tvShows.vote_average.toString()
+                tvVoteAverage.text = tvShows.voteAverage.toString()
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.EXTRA_ID, tvShows.id)

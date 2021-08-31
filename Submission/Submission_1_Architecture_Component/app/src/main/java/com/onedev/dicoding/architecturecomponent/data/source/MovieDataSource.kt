@@ -1,19 +1,19 @@
 package com.onedev.dicoding.architecturecomponent.data.source
 
 import androidx.lifecycle.LiveData
-import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieDetailResponse
-import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieResponseResult
-import com.onedev.dicoding.architecturecomponent.data.source.remote.response.TvShowDetailResponse
-import com.onedev.dicoding.architecturecomponent.data.source.remote.response.TvShowResponseResult
+import com.onedev.dicoding.architecturecomponent.data.source.local.MovieDetailEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.MovieEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.TvShowDetailEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.TvShowEntity
 
 interface MovieDataSource {
 
-    fun getPopularMovie(apiKey: String, page: Int): LiveData<List<MovieResponseResult>>
+    fun getPopularMovie(): LiveData<List<MovieEntity>>
 
-    fun getDetailMovie(movieId: Int, apiKey: String): LiveData<MovieDetailResponse>
+    fun getDetailMovie(movieId: Int): LiveData<MovieDetailEntity>
 
-    fun getPopularTvShow(apiKey: String, page: Int): LiveData<List<TvShowResponseResult>>
+    fun getPopularTvShow(): LiveData<List<TvShowEntity>>
 
-    fun getDetailTvShow(tvShow: Int, apiKey: String): LiveData<TvShowDetailResponse>
+    fun getDetailTvShow(tvShowId: Int): LiveData<TvShowDetailEntity>
 
 }

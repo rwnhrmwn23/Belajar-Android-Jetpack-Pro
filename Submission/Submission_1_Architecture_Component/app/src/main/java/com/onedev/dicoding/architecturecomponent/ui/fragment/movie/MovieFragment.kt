@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.onedev.dicoding.architecturecomponent.BuildConfig
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentMovieBinding
 import com.onedev.dicoding.architecturecomponent.viewmodel.ViewModelFactory
 
@@ -31,11 +30,11 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         movieAdapter = MovieAdapter()
-        factory = ViewModelFactory.getInstance(requireActivity())
+        factory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
         binding?.progressBar?.visibility = View.VISIBLE
-        viewModel.getPopularMovie(BuildConfig.API_KEY, 1).observe(viewLifecycleOwner, { movies ->
+        viewModel.getPopularMovie().observe(viewLifecycleOwner, { movies ->
             binding?.progressBar?.visibility = View.GONE
             movieAdapter.setMovies(movies)
             movieAdapter.notifyDataSetChanged()

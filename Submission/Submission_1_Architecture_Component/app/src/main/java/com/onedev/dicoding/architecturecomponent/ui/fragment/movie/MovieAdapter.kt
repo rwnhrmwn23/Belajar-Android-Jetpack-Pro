@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.onedev.dicoding.architecturecomponent.R
 import com.onedev.dicoding.architecturecomponent.data.api.PICTURE_BASE_URL
-import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieResponseResult
+import com.onedev.dicoding.architecturecomponent.data.source.local.MovieEntity
 import com.onedev.dicoding.architecturecomponent.databinding.ItemsMoviesBinding
 import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailActivity
 import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.loadImage
 
 class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private var listMovie = ArrayList<MovieResponseResult>()
+    private var listMovie = ArrayList<MovieEntity>()
 
-    fun setMovies(movies: List<MovieResponseResult>?) {
+    fun setMovies(movies: List<MovieEntity>?) {
         if (movies == null) return
         this.listMovie.clear()
         this.listMovie.addAll(movies)
@@ -37,9 +37,9 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     class MovieViewHolder(private val binding: ItemsMoviesBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movies: MovieResponseResult) {
+        fun bind(movies: MovieEntity) {
             with(binding) {
-                imgPoster.loadImage(PICTURE_BASE_URL+movies.poster_path)
+                imgPoster.loadImage(PICTURE_BASE_URL+movies.posterPath)
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.EXTRA_ID, movies.id)

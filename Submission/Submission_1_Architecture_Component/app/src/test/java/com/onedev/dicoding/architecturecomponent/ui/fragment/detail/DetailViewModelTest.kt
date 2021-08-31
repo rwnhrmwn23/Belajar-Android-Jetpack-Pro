@@ -62,7 +62,7 @@ class DetailViewModelTest {
 
         `when`(movieId.value?.let { movieRepository.getDetailMovie(it, apiKey) }).thenReturn(movieDetail)
 
-        val movieEntities = movieId.value?.let { viewModel.getDetailMovie(it, apiKey).value }
+        val movieEntities = movieId.value?.let { viewModel.getDetailMovie(it).value }
 
         movieId.value?.let { verify(movieRepository).getDetailMovie(it, apiKey) }
 
@@ -103,7 +103,7 @@ class DetailViewModelTest {
 
         `when`(tvShowId.value?.let { movieRepository.getDetailTvShow(it, apiKey) }).thenReturn(tvShowDetail)
 
-        val tvShowEntities = tvShowId.value?.let { viewModel.getDetailTvShow(it, apiKey).value }
+        val tvShowEntities = tvShowId.value?.let { viewModel.getDetailTvShow(it).value }
 
         tvShowId.value?.let { verify(movieRepository).getDetailTvShow(it, apiKey) }
 

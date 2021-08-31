@@ -1,6 +1,5 @@
 package com.onedev.dicoding.architecturecomponent.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
@@ -16,9 +15,9 @@ class ViewModelFactory private constructor(private val movieRepository: MovieRep
         @Volatile
         private var instance: ViewModelFactory? = null
 
-        fun getInstance(context: Context): ViewModelFactory =
+        fun getInstance(): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideMovieRepository(context)).apply {
+                instance ?: ViewModelFactory(Injection.provideMovieRepository()).apply {
                     instance = this
                 }
             }

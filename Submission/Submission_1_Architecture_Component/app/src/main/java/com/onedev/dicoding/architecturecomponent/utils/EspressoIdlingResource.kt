@@ -1,19 +1,17 @@
 package com.onedev.dicoding.architecturecomponent.utils
 
+import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.idling.CountingIdlingResource
 
 
 object EspressoIdlingResource {
 
     private const val RESOURCE = "Global"
-    val idlingResource = CountingIdlingResource(RESOURCE)
+    private val espressoIdlingResource = CountingIdlingResource(RESOURCE)
 
-    fun increment() {
-        idlingResource.increment()
-    }
+    fun increment() = espressoIdlingResource.increment()
+    fun decrement() = espressoIdlingResource.decrement()
+    fun getEspressoIdlingResource(): IdlingResource = espressoIdlingResource
 
-    fun decrement() {
-        idlingResource.decrement()
-    }
 
 }

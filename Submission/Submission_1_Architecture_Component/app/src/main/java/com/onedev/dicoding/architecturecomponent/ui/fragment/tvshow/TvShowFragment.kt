@@ -1,5 +1,6 @@
 package com.onedev.dicoding.architecturecomponent.ui.fragment.tvshow
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.onedev.dicoding.architecturecomponent.BuildConfig
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentTvShowBinding
 import com.onedev.dicoding.architecturecomponent.viewmodel.ViewModelFactory
 
@@ -26,15 +26,16 @@ class TvShowFragment : Fragment() {
         return binding?.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         tvShowAdapter = TvShowAdapter()
-        factory = ViewModelFactory.getInstance(requireActivity())
+        factory = ViewModelFactory.getInstance()
         viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         binding?.progressBar?.visibility = View.VISIBLE
-        viewModel.getPopularTvShow(BuildConfig.API_KEY, 1).observe(viewLifecycleOwner, {
+        viewModel.getPopularTvShow().observe(viewLifecycleOwner, {
             binding?.progressBar?.visibility = View.GONE
             tvShowAdapter.setTvShows(it)
             tvShowAdapter.notifyDataSetChanged()

@@ -13,4 +13,5 @@
     <string name="share_info">Yuk Nonton Film %s Di Bioskop Kesayangan Anda!</string>
     <string name="tap_to_favorite">Tap To Favorite</string>
     <string name="favorite">Favorite</string>
+    <string name="empty_data">Empty Data</string>
 </resources>

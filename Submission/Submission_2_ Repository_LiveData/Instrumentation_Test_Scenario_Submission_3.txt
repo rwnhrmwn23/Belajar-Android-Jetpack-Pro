@@ -1,0 +1,66 @@
+Skenario Instrumentation Test
+
+1. Menampilkan Data Film loadMovies()
+	- Memastikan rv_movie dalam keadaan tampil
+	- Scroll rv_movie ke posisi data terakhir.
+
+2. Menampilkan Deta Detail Film loadDetailMovie()
+	- Memberi tindakan click data pertama pada rv_movie
+	- Memastikan img_poster tampil dan data sesuai yang diharapkan
+	- Memastikan collapsing toolbar tampil dan data sesuai yang diharapkan
+	- Memastikan tv_option_information tampil dan data sesuai yang diharapkan
+	- Memastikan tv_duration tampil dan data sesuai yang diharapkan
+	- Memastikan tv_overview tampil dan data sesuai yang diharapkan
+
+3. Menampilkan Data TV loadTvShows()
+	- Memberi tindakan click fragment R.id.tvShowFragment pada bottom navigation
+	- Memastikan rv_tv_show dalam keadaan tampil
+	- Scroll rv_tv_show ke posisi data terakhir.
+
+4. Menampilkan Data Detail Film loadDetailTvShow()
+	- Memberi tindakan click fragment R.id.tvShowFragment pada bottom navigation
+	- Memberi tindakan click data ke 11 pada rv_tv_show
+	- Memastikan img_poster tampil dan data sesuai yang diharapkan
+	- Memastikan collapsing toolbar tampil dan data sesuai yang diharapkan
+	- Memastikan tv_option_information tampil dan data sesuai yang diharapkan
+	- Memastikan tv_overview tampil dan data sesuai yang diharapkan
+
+5. Menampilkan Data Movie Favorit loadFavMovies()
+	- Memberi tindakan click fragment favoriteFragment pada bottom navigation
+	- Memastikan rv_fav_movie dalam keadaan tampil
+	- Scroll rv_fav_movie ke posisi data terakhir.
+
+6. Menampilkan Data Detail Movie Favorit loadDetailFavMovie()
+	- Memastikan rv_movie dalam keaadan tampil
+	- Memberi tindakan click data pertama pada rv_movie
+	- Memberi tindakan click fab_favorite untuk update data ke dalam table Movie Favorit
+	- Memberi tindakan click pada icon back button 
+	- Memberi tindakan click fragment favoriteFragment pada bottom navigation
+	- Memastikan rv_fav_movie dalam keaadan tampil dan berikan action klik data pertama
+	- Memberi tindakan click fab_favorite untuk menghapus data dari table Movie Favorit
+	- Memastikan collapsing toolbar tampil dan data sesuai yang diharapkan
+	- Memastikan tv_option_information tampil dan data sesuai yang diharapkan
+	- Memastikan tv_duration tampil dan data sesuai yang diharapkan
+	- Memastikan tv_overview tampil dan data sesuai yang diharapkan
+
+7. Menampilkan Data Tv Show Favorit loadFavTvShow()
+	- Memberi tindakan click fragment favoriteFragment pada bottom navigation
+	- Memberi tindakan click dengan pada yang bertuliskan TV SHOW
+	- Memastikan rv_fav_tv_show dalam keadaan tampil
+	- Scroll rv_fav_tv_show ke posisi data terakhir.
+
+8. Menampilkan Data Detail Film Favorit loadDetailFavTvShow()
+	- Memberi tindakan click fragment favoriteFragment pada bottom navigation
+	- Memastikan rv_tv_show dalam keaadan tampil
+	- Memberi tindakan click data 11 pada rv_tv_show
+	- Memberi tindakan click fab_favorite untuk update data ke dalam table Movie Favorit
+	- Memberi tindakan click pada icon back button 
+	- Memberi tindakan click fragment favoriteFragment pada bottom navigation
+	- Memberi tindakan click dengan pada yang bertuliskan TV SHOW
+	- Memastikan rv_fav_tv_show keaadan tampil dan berikan action klik data pertama
+	- Memberi tindakan click fab_favorite untuk menghapus data dari table Movie Favorit
+	- Memastikan collapsing toolbar tampil dan data sesuai yang diharapkan
+	- Memastikan tv_option_information tampil dan data sesuai yang diharapkan
+	- Memastikan tv_duration tampil dan data sesuai yang diharapkan
+	- Memastikan tv_overview tampil dan data sesuai yang diharapkan
+

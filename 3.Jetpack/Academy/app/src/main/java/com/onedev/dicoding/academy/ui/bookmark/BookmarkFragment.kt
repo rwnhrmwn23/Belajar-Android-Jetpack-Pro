@@ -10,9 +10,8 @@ import androidx.core.app.ShareCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onedev.dicoding.academy.R
-import com.onedev.dicoding.academy.data.CourseEntity
+import com.onedev.dicoding.academy.data.source.local.entity.CourseEntity
 import com.onedev.dicoding.academy.databinding.FragmentBookmarkBinding
-import com.onedev.dicoding.academy.utils.DataDummy
 import com.onedev.dicoding.academy.viewmodel.ViewModelFactory
 
 class BookmarkFragment : Fragment(), BookmarkFragmentCallback {

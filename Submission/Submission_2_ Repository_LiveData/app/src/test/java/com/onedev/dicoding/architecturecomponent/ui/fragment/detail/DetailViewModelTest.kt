@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.verify
 import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
-import com.onedev.dicoding.architecturecomponent.data.source.local.MovieDetailEntity
-import com.onedev.dicoding.architecturecomponent.data.source.local.TvShowDetailEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.MovieEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailViewModel
 import com.onedev.dicoding.architecturecomponent.utils.DataDummy
 import org.junit.Assert.assertEquals
@@ -24,10 +24,10 @@ class DetailViewModelTest {
 
     private lateinit var viewModel: DetailViewModel
 
-    private val dummyMovie = DataDummy.getDetailMovie()
+    private val dummyMovie = DataDummy.getMovies()[0]
     private val dummyMovieId = dummyMovie.id
 
-    private val dummyTvShow = DataDummy.getDetailTvShow()
+    private val dummyTvShow = DataDummy.getTvShows()[0]
     private val dummyTvShowId = dummyTvShow.id
 
     @get:Rule
@@ -37,10 +37,10 @@ class DetailViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var movieDetailObserver: Observer<MovieDetailEntity>
+    private lateinit var movieDetailObserver: Observer<MovieEntity>
 
     @Mock
-    private lateinit var tvShowDetailObserver: Observer<TvShowDetailEntity>
+    private lateinit var tvShowDetailObserver: Observer<TvShowEntity>
 
     // Get Data Movie Testing
     @Before
@@ -50,7 +50,7 @@ class DetailViewModelTest {
 
     @Test
     fun getMovieDetail() {
-        val movie = MutableLiveData<MovieDetailEntity>()
+        val movie = MutableLiveData<MovieEntity>()
         movie.value = dummyMovie
 
         `when`(movieRepository.getDetailMovie(dummyMovieId)).thenReturn(movie)
@@ -63,7 +63,6 @@ class DetailViewModelTest {
         assertEquals(dummyMovie.overview, detailEntity?.overview)
         assertEquals(dummyMovie.popularity, detailEntity?.popularity)
         assertEquals(dummyMovie.poster_path, detailEntity?.poster_path)
-        assertEquals(dummyMovie.production_companies, detailEntity?.production_companies)
         assertEquals(dummyMovie.release_date, detailEntity?.release_date)
         assertEquals(dummyMovie.runtime, detailEntity?.runtime)
         assertEquals(dummyMovie.status, detailEntity?.status)
@@ -77,7 +76,7 @@ class DetailViewModelTest {
 
     @Test
     fun getTvShowDetail() {
-        val tvShow = MutableLiveData<TvShowDetailEntity>()
+        val tvShow = MutableLiveData<TvShowEntity>()
         tvShow.value = dummyTvShow
 
         `when`(movieRepository.getDetailTvShow(dummyTvShowId)).thenReturn(tvShow)
@@ -90,7 +89,6 @@ class DetailViewModelTest {
         assertEquals(dummyTvShow.overview, detailEntity?.overview)
         assertEquals(dummyTvShow.popularity, detailEntity?.popularity)
         assertEquals(dummyTvShow.poster_path, detailEntity?.poster_path)
-        assertEquals(dummyTvShow.production_companies, detailEntity?.production_companies)
         assertEquals(dummyTvShow.status, detailEntity?.status)
         assertEquals(dummyTvShow.tagline, detailEntity?.tagline)
         assertEquals(dummyTvShow.vote_average, detailEntity?.vote_average)

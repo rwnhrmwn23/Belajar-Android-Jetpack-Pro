@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Architecture Component</string>
+    <string name="app_name">Movie Catalog</string>
     <string name="poster_movie">Poster Movie</string>
     <string name="movie">Movie</string>
     <string name="tv_show">TV Show</string>
@@ -11,4 +11,13 @@
     <string name="share">Share</string>
     <string name="share_info">Yuk Nonton Film %s Di Bioskop Kesayangan Anda!</string>
     <string name="dummy_vote">8.0</string>
+    <string name="tap_to_favorite">Tap To Favorite</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="favorite">Favorite</string>
+    <string name="content_tab_text">This is Tab %1$d</string>
 </resources>

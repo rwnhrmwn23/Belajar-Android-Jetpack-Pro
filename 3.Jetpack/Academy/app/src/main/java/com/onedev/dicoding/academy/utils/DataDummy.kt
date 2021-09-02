@@ -1,7 +1,7 @@
 package com.onedev.dicoding.academy.utils
 
-import com.onedev.dicoding.academy.data.CourseEntity
-import com.onedev.dicoding.academy.data.ModuleEntity
+import com.onedev.dicoding.academy.data.source.local.entity.CourseEntity
+import com.onedev.dicoding.academy.data.source.local.entity.ModuleEntity
 import com.onedev.dicoding.academy.data.source.remote.response.ContentResponse
 import com.onedev.dicoding.academy.data.source.remote.response.CourseResponse
 import com.onedev.dicoding.academy.data.source.remote.response.ModuleResponse

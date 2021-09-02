@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentMovieBinding
+import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.showToast
 import com.onedev.dicoding.architecturecomponent.viewmodel.ViewModelFactory
+import com.onedev.dicoding.architecturecomponent.vo.Status
 
 class MovieFragment : Fragment() {
     private lateinit var viewModel: MovieViewModel
@@ -30,14 +32,24 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         movieAdapter = MovieAdapter()
-        factory = ViewModelFactory.getInstance()
+        factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
-        binding?.progressBar?.visibility = View.VISIBLE
         viewModel.getPopularMovie().observe(viewLifecycleOwner, { movies ->
-            binding?.progressBar?.visibility = View.GONE
-            movieAdapter.setMovies(movies)
-            movieAdapter.notifyDataSetChanged()
+            if (movies != null) {
+                when (movies.status) {
+                    Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
+                    Status.SUCCESS -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        movieAdapter.setMovies(movies.data)
+                        movieAdapter.notifyDataSetChanged()
+                    }
+                    Status.ERROR -> {
+                        binding?.progressBar?.visibility = View.VISIBLE
+                        requireContext().showToast("Terjadi Kesalahan")
+                    }
+                }
+            }
         })
 
         binding?.rvMovie?.apply {

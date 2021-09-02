@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentTvShowBinding
+import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.showToast
 import com.onedev.dicoding.architecturecomponent.viewmodel.ViewModelFactory
+import com.onedev.dicoding.architecturecomponent.vo.Status
 
 class TvShowFragment : Fragment() {
     private lateinit var factory: ViewModelFactory
@@ -31,14 +33,25 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tvShowAdapter = TvShowAdapter()
-        factory = ViewModelFactory.getInstance()
+        factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         binding?.progressBar?.visibility = View.VISIBLE
-        viewModel.getPopularTvShow().observe(viewLifecycleOwner, {
-            binding?.progressBar?.visibility = View.GONE
-            tvShowAdapter.setTvShows(it)
-            tvShowAdapter.notifyDataSetChanged()
+        viewModel.getPopularTvShow().observe(viewLifecycleOwner, { tvShow ->
+            if (tvShow != null) {
+                when (tvShow.status) {
+                    Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
+                    Status.SUCCESS -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        tvShowAdapter.setTvShows(tvShow.data)
+                        tvShowAdapter.notifyDataSetChanged()
+                    }
+                    Status.ERROR -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        requireContext().showToast("Terjadi Kesalahan")
+                    }
+                }
+            }
         })
 
         binding?.rvTvShow?.apply {

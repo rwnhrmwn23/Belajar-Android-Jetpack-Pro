@@ -3,7 +3,7 @@ package com.onedev.dicoding.academy.ui.reader.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.onedev.dicoding.academy.data.ModuleEntity
+import com.onedev.dicoding.academy.data.source.local.entity.ModuleEntity
 import com.onedev.dicoding.academy.databinding.ItemsModuleListCustomBinding
 
 class ModuleListAdapter internal constructor(private val listener: MyAdapterClickListener): RecyclerView.Adapter<ModuleListAdapter.ModuleViewHolder>(){
@@ -28,10 +28,11 @@ class ModuleListAdapter internal constructor(private val listener: MyAdapterClic
         return ModuleViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ModuleViewHolder, position: Int) {
-        holder.bind(listModules[position])
-        holder.itemView.setOnClickListener {
-            listener.onItemClicked(holder.adapterPosition, listModules[holder.adapterPosition].moduleId)
+    override fun onBindViewHolder(viewHolder: ModuleViewHolder, position: Int) {
+        val module = listModules[position]
+        viewHolder.bind(module)
+        viewHolder.itemView.setOnClickListener {
+            listener.onItemClicked(viewHolder.adapterPosition, listModules[viewHolder.adapterPosition].moduleId)
         }
     }
 

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.onedev.dicoding.academy.R
-import com.onedev.dicoding.academy.data.CourseEntity
+import com.onedev.dicoding.academy.data.source.local.entity.CourseEntity
 import com.onedev.dicoding.academy.databinding.ItemsAcademyBinding
 import com.onedev.dicoding.academy.ui.detail.DetailCourseActivity
 import com.onedev.dicoding.academy.utils.ExtClass.loadImage

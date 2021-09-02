@@ -1,9 +1,12 @@
 package com.onedev.dicoding.architecturecomponent.ui.activity.main
 
 import android.os.Bundle
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.onedev.dicoding.architecturecomponent.R
 import com.onedev.dicoding.architecturecomponent.databinding.ActivityMainBinding
 
@@ -15,24 +18,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
-        val sectionPagerAdapter = MainPagerAdapter(this)
-        binding.viewPager.adapter = sectionPagerAdapter
-        binding.viewPager.setPageTransformer(ZoomOutPageTransformer())
-
-        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-
-        supportActionBar?.elevation = 0F
-    }
-
-    companion object {
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.movie,
-            R.string.tv_show
+        val navView: BottomNavigationView = binding.navView
+        val navController = findNavController(R.id.nav_host_fragment_activity_main2)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.movieFragment, R.id.tvShowFragment, R.id.favoriteFragment
+            )
         )
-    }
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
+    }
 }

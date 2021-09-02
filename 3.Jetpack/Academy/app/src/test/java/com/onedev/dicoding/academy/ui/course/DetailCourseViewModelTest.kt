@@ -3,8 +3,8 @@ package com.onedev.dicoding.academy.ui.course
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.onedev.dicoding.academy.data.CourseEntity
-import com.onedev.dicoding.academy.data.ModuleEntity
+import com.onedev.dicoding.academy.data.source.local.entity.CourseEntity
+import com.onedev.dicoding.academy.data.source.local.entity.ModuleEntity
 import com.onedev.dicoding.academy.data.source.AcademyRepository
 import com.onedev.dicoding.academy.ui.detail.DetailCourseViewModel
 import com.onedev.dicoding.academy.utils.DataDummy

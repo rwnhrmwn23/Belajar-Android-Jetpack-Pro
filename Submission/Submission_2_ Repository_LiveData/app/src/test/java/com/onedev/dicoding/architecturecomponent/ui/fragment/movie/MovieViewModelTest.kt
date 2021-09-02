@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.verify
 import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
-import com.onedev.dicoding.architecturecomponent.data.source.local.MovieEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.MovieEntity
 import com.onedev.dicoding.architecturecomponent.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull

@@ -50,10 +50,10 @@ class MovieRepositoryTest {
             null
         }.`when`(remote).getDetailMovie(eq(movieId), any())
 
-        val movieDetailEntity = LiveDataTestUtil.getValue(movieCatalogueRepository.getDetailMovie(movieId))
+        val movieEntity = LiveDataTestUtil.getValue(movieCatalogueRepository.getDetailMovie(movieId))
         verify(remote).getDetailMovie(eq(movieId), any())
-        assertNotNull(movieDetailEntity)
-        assertEquals(movieDetail.id, movieDetailEntity.id)
+        assertNotNull(movieEntity)
+        assertEquals(movieDetail.id, movieEntity.id)
     }
 
     @Test
@@ -76,9 +76,9 @@ class MovieRepositoryTest {
             null
         }.`when`(remote).getDetailTvShow(eq(tvShowId), any())
 
-        val tvShowDetailEntity = LiveDataTestUtil.getValue(movieCatalogueRepository.getDetailTvShow(tvShowId))
+        val tvShowEntity = LiveDataTestUtil.getValue(movieCatalogueRepository.getDetailTvShow(tvShowId))
         verify(remote).getDetailTvShow(eq(tvShowId), any())
-        assertNotNull(tvShowDetailEntity)
-        assertEquals(tvShowDetail.id, tvShowDetailEntity.id)
+        assertNotNull(tvShowEntity)
+        assertEquals(tvShowDetail.id, tvShowEntity.id)
     }
 }

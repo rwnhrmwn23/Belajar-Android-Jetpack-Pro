@@ -36,19 +36,19 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        tools:visibility="visible">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <ImageView
                 android:id="@+id/img_poster"
@@ -145,5 +145,17 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_baseline_favorite_border"
+        app:backgroundTint="@color/colorSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white"
+        android:contentDescription="@string/tap_to_favorite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,8 @@ package com.onedev.dicoding.architecturecomponent.ui.fragment.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.onedev.dicoding.architecturecomponent.data.source.MovieDataSource
-import com.onedev.dicoding.architecturecomponent.data.source.local.MovieDetailEntity
-import com.onedev.dicoding.architecturecomponent.data.source.local.MovieEntity
-import com.onedev.dicoding.architecturecomponent.data.source.local.TvShowDetailEntity
-import com.onedev.dicoding.architecturecomponent.data.source.local.TvShowEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.MovieEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.data.source.remote.RemoteDataSource
 import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieDetailResponse
 import com.onedev.dicoding.architecturecomponent.data.source.remote.response.MovieResponseResult
@@ -24,7 +22,18 @@ class FakeMovieRepository(private val remoteDataSource: RemoteDataSource) : Movi
                 if (listMovieResponseResult != null) {
                     for (response in listMovieResponseResult) {
                         with(response) {
-                            val movieEntities = MovieEntity(id, title, poster_path, vote_average)
+                            val movieEntities = MovieEntity(
+                                id,
+                                title,
+                                poster_path,
+                                vote_average,
+                                null,
+                                overview,
+                                popularity,
+                                release_date,
+                                runtime,
+                                status,
+                                tagline)
                             movieResult.add(movieEntities)
                         }
                     }
@@ -35,8 +44,8 @@ class FakeMovieRepository(private val remoteDataSource: RemoteDataSource) : Movi
         return movieResults
     }
 
-    override fun getDetailMovie(movieId: Int): LiveData<MovieDetailEntity> {
-        val movieDetails = MutableLiveData<MovieDetailEntity>()
+    override fun getDetailMovie(movieId: Int): LiveData<MovieEntity> {
+        val movieDetails = MutableLiveData<MovieEntity>()
         remoteDataSource.getDetailMovie(movieId, object : RemoteDataSource.LoadDetailMovieCallback {
             override fun onAllDetailMovieReceived(movieDetailResponse: MovieDetailResponse?) {
                 if (movieDetailResponse != null) {
@@ -46,25 +55,18 @@ class FakeMovieRepository(private val remoteDataSource: RemoteDataSource) : Movi
                             genres.add(genre.name)
                         }
 
-                        val productionCompanies = ArrayList<String>()
-                        for (productionCompany in movieDetailResponse.production_companies) {
-                            productionCompanies.add(productionCompany.name)
-                        }
-
-                        val movieDetail = MovieDetailEntity(
-                            genres,
+                        val movieDetail = MovieEntity(
                             id,
+                            title,
+                            poster_path,
+                            vote_average,
+                            genres.toString(),
                             overview,
                             popularity,
-                            poster_path,
-                            productionCompanies,
                             release_date,
                             runtime,
                             status,
-                            tagline,
-                            title,
-                            vote_average
-                        )
+                            tagline)
                         movieDetails.postValue(movieDetail)
                     }
                 }
@@ -81,7 +83,16 @@ class FakeMovieRepository(private val remoteDataSource: RemoteDataSource) : Movi
                     val tvShowResult = ArrayList<TvShowEntity>()
                     for (response in listTvShowResponseResult) {
                         with(response) {
-                            val tvShowEntities = TvShowEntity(id, name, poster_path, vote_average)
+                            val tvShowEntities = TvShowEntity(
+                                id,
+                                name,
+                                poster_path,
+                                vote_average,
+                                null,
+                                overview,
+                                popularity,
+                                status,
+                                tagline)
                             tvShowResult.add(tvShowEntities)
                         }
                     }
@@ -93,42 +104,33 @@ class FakeMovieRepository(private val remoteDataSource: RemoteDataSource) : Movi
         return tvShowResults
     }
 
-    override fun getDetailTvShow(tvShowId: Int): LiveData<TvShowDetailEntity> {
-        val tvShowDetails = MutableLiveData<TvShowDetailEntity>()
-        remoteDataSource.getDetailTvShow(
-            tvShowId,
-            object : RemoteDataSource.LoadDetailTvShowCallback {
-                override fun onAllDetailTvShowReceived(tvShowDetailResponse: TvShowDetailResponse?) {
-                    if (tvShowDetailResponse != null) {
-                        with(tvShowDetailResponse) {
-                            val genres = ArrayList<String>()
-                            for (genre in tvShowDetailResponse.genres) {
-                                genres.add(genre.name)
-                            }
-
-                            val productionCompanies = ArrayList<String>()
-                            for (productionCompany in tvShowDetailResponse.production_companies) {
-                                productionCompanies.add(productionCompany.name)
-                            }
-
-                            val tvShowDetail = TvShowDetailEntity(
-                                genres,
-                                id,
-                                name,
-                                overview,
-                                popularity,
-                                poster_path,
-                                productionCompanies,
-                                status,
-                                tagline,
-                                vote_average
-                            )
-                            tvShowDetails.postValue(tvShowDetail)
+    override fun getDetailTvShow(tvShowId: Int): LiveData<TvShowEntity> {
+        val tvShowDetails = MutableLiveData<TvShowEntity>()
+        remoteDataSource.getDetailTvShow(tvShowId, object : RemoteDataSource.LoadDetailTvShowCallback {
+            override fun onAllDetailTvShowReceived(tvShowDetailResponse: TvShowDetailResponse?) {
+                if (tvShowDetailResponse != null) {
+                    with(tvShowDetailResponse) {
+                        val genres = ArrayList<String>()
+                        for (genre in tvShowDetailResponse.genres) {
+                            genres.add(genre.name)
                         }
+
+                        val tvShowDetail = TvShowEntity(
+                            id,
+                            name,
+                            poster_path,
+                            vote_average,
+                            genres.toString(),
+                            overview,
+                            popularity,
+                            status,
+                            tagline)
+                        tvShowDetails.postValue(tvShowDetail)
                     }
                 }
+            }
 
-            })
+        })
         return tvShowDetails
     }
 

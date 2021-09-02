@@ -5,17 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.onedev.dicoding.academy.data.ModuleEntity
+import com.onedev.dicoding.academy.data.source.local.entity.ModuleEntity
 import com.onedev.dicoding.academy.databinding.FragmentModuleListBinding
 import com.onedev.dicoding.academy.ui.course.CourseReaderActivity
 import com.onedev.dicoding.academy.ui.course.CourseReaderViewModel
 import com.onedev.dicoding.academy.ui.reader.CourseReaderCallback
-import com.onedev.dicoding.academy.utils.DataDummy
 import com.onedev.dicoding.academy.viewmodel.ViewModelFactory
+import com.onedev.dicoding.academy.vo.Status
 
 class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener {
     private var _binding: FragmentModuleListBinding? = null
@@ -47,9 +48,23 @@ class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener 
 
         binding?.progressBar?.visibility = View.VISIBLE
         adapter = ModuleListAdapter(this)
-        viewModel.getModules().observe(viewLifecycleOwner, {
-            populateRecyclerView(it)
+
+        viewModel.modules.observe(viewLifecycleOwner, { moduleEntities ->
+            if (moduleEntities != null) {
+                when (moduleEntities.status) {
+                    Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
+                    Status.SUCCESS -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        populateRecyclerView(moduleEntities.data as List<ModuleEntity>)
+                    }
+                    Status.ERROR -> {
+                        binding?.progressBar?.visibility = View.GONE
+                        Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         })
+
     }
 
     private fun populateRecyclerView(modules: List<ModuleEntity>) {

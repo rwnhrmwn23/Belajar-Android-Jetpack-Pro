@@ -3,13 +3,22 @@ package com.onedev.dicoding.architecturecomponent.ui.activity.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
-import com.onedev.dicoding.architecturecomponent.data.source.local.MovieDetailEntity
-import com.onedev.dicoding.architecturecomponent.data.source.local.TvShowDetailEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.MovieEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
+import com.onedev.dicoding.architecturecomponent.vo.Resource
 
 class DetailViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
-    fun getDetailMovie(movieId: Int): LiveData<MovieDetailEntity> = movieRepository.getDetailMovie(movieId)
+    fun getDetailMovie(movieId: Int): LiveData<Resource<MovieEntity>> = movieRepository.getDetailMovie(movieId)
 
-    fun getDetailTvShow(tvShowId: Int): LiveData<TvShowDetailEntity> = movieRepository.getDetailTvShow(tvShowId)
+    fun getDetailTvShow(tvShowId: Int): LiveData<Resource<TvShowEntity>> = movieRepository.getDetailTvShow(tvShowId)
+
+    fun setFavoriteMovie(movieEntity: MovieEntity, newState: Boolean) {
+        movieRepository.setFavoriteMovie(movieEntity, newState)
+    }
+
+    fun setTvShowMovie(tvShowEntity: TvShowEntity, newState: Boolean) {
+        movieRepository.setFavoriteTvShow(tvShowEntity, newState)
+    }
 
 }

@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onedev.dicoding.academy.databinding.FragmentAcademyBinding
 import com.onedev.dicoding.academy.utils.DataDummy
 import com.onedev.dicoding.academy.viewmodel.ViewModelFactory
+import com.onedev.dicoding.academy.vo.Status
 
 class AcademyFragment : Fragment() {
     private var _binding: FragmentAcademyBinding? = null
@@ -35,11 +37,21 @@ class AcademyFragment : Fragment() {
             val viewModel = ViewModelProvider(this, factory)[AcademyViewModel::class.java]
             val academyAdapter = AcademyAdapter()
 
-            binding?.progressBar?.visibility = View.VISIBLE
-            viewModel.getCourse().observe(viewLifecycleOwner, {
-                binding?.progressBar?.visibility = View.GONE
-                academyAdapter.setCourses(it)
-                academyAdapter.notifyDataSetChanged()
+            viewModel.getCourse().observe(viewLifecycleOwner, { course ->
+                if (course != null) {
+                    when (course.status) {
+                        Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            academyAdapter.setCourses(course.data)
+                            academyAdapter.notifyDataSetChanged()
+                        }
+                        Status.ERROR -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             })
 
             binding?.rvAcademy?.apply {

@@ -9,7 +9,6 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.onedev.dicoding.architecturecomponent.R
-import com.onedev.dicoding.architecturecomponent.ui.activity.main.MainActivity
 import com.onedev.dicoding.architecturecomponent.utils.DataDummy
 import com.onedev.dicoding.architecturecomponent.utils.EspressoIdlingResource
 import org.junit.After
@@ -20,12 +19,12 @@ class MovieFragmentTest {
 
     private val dummyMovie = DataDummy.getMovies()
     private val dummyTvShow = DataDummy.getTvShows()
-    private val dummyDetailMovie = DataDummy.getDetailMovie()
-    private val dummyDetailTvShow = DataDummy.getDetailTvShow()
+    private val dummyDetailMovie = DataDummy.getMovies()[0]
+    private val dummyDetailTvShow = DataDummy.getTvShows()[0]
 
     @Before
     fun setup() {
-        ActivityScenario.launch(MainActivity::class.java)
+        ActivityScenario.launch(MainActivityTet::class.java)
         IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
     }
 

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.verify
 import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
-import com.onedev.dicoding.architecturecomponent.data.source.local.TvShowEntity
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -37,7 +37,7 @@ class TvShowViewModelTest {
     }
 
     @Test
-    fun getMovies() {
+    fun getTvShow() {
         val dummyTvShows = DataDummy.getTvShows()
         val tvShows = MutableLiveData<List<TvShowEntity>>()
         tvShows.value = dummyTvShows

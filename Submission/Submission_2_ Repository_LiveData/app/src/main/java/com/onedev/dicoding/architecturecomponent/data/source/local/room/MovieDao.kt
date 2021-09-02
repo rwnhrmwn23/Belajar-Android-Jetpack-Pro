@@ -34,7 +34,7 @@ interface MovieDao {
     fun insertTvShow(tvShowEntities: List<TvShowEntity>)
 
     @Update
-    fun updateMovie(movie: MovieEntity)
+    fun updateMovie(movieEntity: MovieEntity)
 
     @Update
     fun updateTvShow(tvShowEntity: TvShowEntity)

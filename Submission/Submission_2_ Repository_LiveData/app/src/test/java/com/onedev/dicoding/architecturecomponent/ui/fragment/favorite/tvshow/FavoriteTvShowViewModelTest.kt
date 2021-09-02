@@ -3,11 +3,10 @@ package com.onedev.dicoding.architecturecomponent.ui.fragment.favorite.tvshow
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.nhaarman.mockitokotlin2.verify
+import androidx.paging.PagedList
 import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
 import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.ui.fragment.favorite.FavoriteViewModel
-import com.onedev.dicoding.architecturecomponent.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -15,7 +14,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -30,6 +30,9 @@ class FavoriteTvShowViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
+    private lateinit var pagedList: PagedList<TvShowEntity>
+
+    @Mock
     private lateinit var observer: Observer<List<TvShowEntity>>
 
     @Before
@@ -38,12 +41,13 @@ class FavoriteTvShowViewModelTest {
     }
 
     @Test
-    fun getFavoriteMovies() {
-        val dummyTvShows = DataDummy.getTvShows()
-        val tvShows = MutableLiveData<List<TvShowEntity>>()
+    fun getFavoriteTvShow() {
+        val dummyTvShows = pagedList
+        `when`(dummyTvShows.size).thenReturn(1)
+        val tvShows = MutableLiveData<PagedList<TvShowEntity>>()
         tvShows.value = dummyTvShows
 
-        Mockito.`when`(movieRepository.getFavoriteTvShow()).thenReturn(tvShows)
+        `when`(movieRepository.getFavoriteTvShow()).thenReturn(tvShows)
         val tvShowEntities = viewModel.getFavoriteTvShow().value
         verify(movieRepository).getFavoriteTvShow()
 

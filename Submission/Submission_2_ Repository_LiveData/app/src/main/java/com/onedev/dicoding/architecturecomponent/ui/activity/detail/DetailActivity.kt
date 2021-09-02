@@ -157,10 +157,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                         getString(R.string.movie) -> viewModel.setFavoriteMovie(movieEntity, !movieEntity.favorite)
                         else -> viewModel.setTvShowMovie(tvShowEntity, !tvShowEntity.favorite)
                     }
-                    if (!movieEntity.favorite)
-                        this.showToast("Berhasil Menambahkan ke Daftar Favorit")
-                    else
-                        this.showToast("Berhasil Menghapus dari Daftar Favorit")
                 }
             }
         }

@@ -3,10 +3,9 @@ package com.onedev.dicoding.architecturecomponent.ui.fragment.tvshow
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.nhaarman.mockitokotlin2.verify
+import androidx.paging.PagedList
 import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
 import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
-import com.onedev.dicoding.architecturecomponent.utils.DataDummy
 import com.onedev.dicoding.architecturecomponent.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -16,6 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -30,7 +30,10 @@ class TvShowViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var observer: Observer<Resource<List<TvShowEntity>>>
+    private lateinit var pagedList: PagedList<TvShowEntity>
+
+    @Mock
+    private lateinit var observer: Observer<Resource<PagedList<TvShowEntity>>>
 
     @Before
     fun setup() {
@@ -39,8 +42,9 @@ class TvShowViewModelTest {
 
     @Test
     fun getTvShow() {
-        val dummyTvShows = Resource.success(DataDummy.getTvShows())
-        val tvShows = MutableLiveData<Resource<List<TvShowEntity>>>()
+        val dummyTvShows = Resource.success(pagedList)
+        `when`(dummyTvShows.data?.size).thenReturn(1)
+        val tvShows = MutableLiveData<Resource<PagedList<TvShowEntity>>>()
         tvShows.value = dummyTvShows
 
         `when`(movieRepository.getPopularTvShow()).thenReturn(tvShows)

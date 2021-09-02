@@ -48,8 +48,7 @@ class MovieFragmentTest {
 
         onView(withId(R.id.img_poster)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_title)).check(matches(withText(dummyDetailMovie.title)))
+        onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
 
         onView(withId(R.id.tv_option_information)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_option_information)).check(matches(withText(dummyDetailMovie.release_date)))
@@ -75,8 +74,7 @@ class MovieFragmentTest {
 
         onView(withId(R.id.img_poster)).check(matches(isDisplayed()))
 
-        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_title)).check(matches(withText(dummyDetailTvShow.name)))
+        onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
 
         onView(withId(R.id.tv_option_information)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_option_information)).check(matches(withText(dummyDetailTvShow.tagline)))
@@ -104,7 +102,8 @@ class MovieFragmentTest {
         onView(withId(R.id.rv_fav_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.fab_favorite)).perform(click())
 
-        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
+
         onView(withId(R.id.tv_option_information)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_duration)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
@@ -132,7 +131,8 @@ class MovieFragmentTest {
         onView(withId(R.id.rv_fav_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.fab_favorite)).perform(click())
 
-        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
+
         onView(withId(R.id.tv_option_information)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
 

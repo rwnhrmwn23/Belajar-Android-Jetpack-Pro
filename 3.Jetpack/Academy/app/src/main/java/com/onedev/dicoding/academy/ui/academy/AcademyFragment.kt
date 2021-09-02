@@ -28,7 +28,6 @@ class AcademyFragment : Fragment() {
         return binding?.root
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,8 +42,7 @@ class AcademyFragment : Fragment() {
                         Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
                         Status.SUCCESS -> {
                             binding?.progressBar?.visibility = View.GONE
-                            academyAdapter.setCourses(course.data)
-                            academyAdapter.notifyDataSetChanged()
+                            academyAdapter.submitList(course.data)
                         }
                         Status.ERROR -> {
                             binding?.progressBar?.visibility = View.GONE

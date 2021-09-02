@@ -1,6 +1,7 @@
 package com.onedev.dicoding.academy.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.onedev.dicoding.academy.data.source.local.entity.CourseEntity
 import com.onedev.dicoding.academy.data.source.local.entity.ModuleEntity
@@ -10,10 +11,10 @@ import com.onedev.dicoding.academy.data.source.local.entity.CourseWithModule
 interface AcademyDao {
 
     @Query("SELECT * FROM courseEntities")
-    fun getCourse(): LiveData<List<CourseEntity>>
+    fun getCourse(): DataSource.Factory<Int, CourseEntity>
 
     @Query("SELECT * FROM courseEntities where bookmarked = 1")
-    fun getBookmarkedCourse(): LiveData<List<CourseEntity>>
+    fun getBookmarkedCourse(): DataSource.Factory<Int, CourseEntity>
 
     @Transaction
     @Query("SELECT * FROM courseEntities WHERE courseId = :courseId")

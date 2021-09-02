@@ -3,6 +3,8 @@ package com.onedev.dicoding.academy.ui.bookmark
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.onedev.dicoding.academy.data.source.local.entity.CourseEntity
 import com.onedev.dicoding.academy.databinding.ItemsBookmarkBinding
@@ -10,15 +12,20 @@ import com.onedev.dicoding.academy.ui.detail.DetailCourseActivity
 import com.onedev.dicoding.academy.utils.ExtClass.loadImage
 
 class BookmarkAdapter(private val callback: BookmarkFragmentCallback) :
-    RecyclerView.Adapter<BookmarkAdapter.CourseViewHolder>() {
+    PagedListAdapter<CourseEntity, BookmarkAdapter.CourseViewHolder>(DIFF_CALLBACK) {
 
-    private val listCourse = ArrayList<CourseEntity>()
-
-    fun setCourses(course: List<CourseEntity>?) {
-        if (course == null) return
-        this.listCourse.clear()
-        this.listCourse.addAll(course)
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CourseEntity>() {
+            override fun areItemsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean {
+                return oldItem.courseId == newItem.courseId
+            }
+            override fun areContentsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
+
+    fun getSwipedData(swipedPosition: Int): CourseEntity? = getItem(swipedPosition)
 
     inner class CourseViewHolder(private val binding: ItemsBookmarkBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -42,13 +49,15 @@ class BookmarkAdapter(private val callback: BookmarkFragmentCallback) :
         parent: ViewGroup,
         viewType: Int
     ): BookmarkAdapter.CourseViewHolder {
-        val binding = ItemsBookmarkBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemsBookmarkBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CourseViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: BookmarkAdapter.CourseViewHolder, position: Int) {
-        holder.bind(listCourse[position])
+        val course = getItem(position)
+        if (course != null) {
+            holder.bind(course)
+        }
     }
-
-    override fun getItemCount(): Int  = listCourse.size
 }

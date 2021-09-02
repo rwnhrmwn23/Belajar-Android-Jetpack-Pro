@@ -3,6 +3,8 @@ package com.onedev.dicoding.academy.ui.academy
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.onedev.dicoding.academy.R
 import com.onedev.dicoding.academy.data.source.local.entity.CourseEntity
@@ -10,14 +12,17 @@ import com.onedev.dicoding.academy.databinding.ItemsAcademyBinding
 import com.onedev.dicoding.academy.ui.detail.DetailCourseActivity
 import com.onedev.dicoding.academy.utils.ExtClass.loadImage
 
-class AcademyAdapter: RecyclerView.Adapter<AcademyAdapter.CourseViewHolder>() {
+class AcademyAdapter: PagedListAdapter<CourseEntity, AcademyAdapter.CourseViewHolder>(DIFF_CALLBACK) {
 
-    private var listCourse = ArrayList<CourseEntity>()
-
-    fun setCourses(courses: List<CourseEntity>?) {
-        if (courses == null) return
-        this.listCourse.clear()
-        this.listCourse.addAll(courses)
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CourseEntity>() {
+            override fun areItemsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean {
+                return oldItem.courseId == newItem.courseId
+            }
+            override fun areContentsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(
@@ -29,10 +34,11 @@ class AcademyAdapter: RecyclerView.Adapter<AcademyAdapter.CourseViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-        holder.bind(listCourse[position])
+        val course = getItem(position)
+        if (course != null) {
+            holder.bind(course)
+        }
     }
-
-    override fun getItemCount(): Int = listCourse.size
 
     class CourseViewHolder(private val binding: ItemsAcademyBinding) :
         RecyclerView.ViewHolder(binding.root) {

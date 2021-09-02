@@ -1,6 +1,7 @@
 package com.onedev.dicoding.architecturecomponent.data.source.local
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.onedev.dicoding.architecturecomponent.data.source.local.entity.MovieEntity
 import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.data.source.local.room.MovieDao
@@ -14,22 +15,22 @@ class LocalDataSource private constructor(private val movieDao: MovieDao) {
             INSTANCE ?: LocalDataSource(movieDao)
     }
 
-    fun getPopularMovie(): LiveData<List<MovieEntity>> = movieDao.getPopularMovie()
+    fun getPopularMovie(): DataSource.Factory<Int, MovieEntity> = movieDao.getPopularMovie()
 
     fun getDetailMovie(movieId: Int): LiveData<MovieEntity> = movieDao.getDetailMovie(movieId)
 
-    fun getFavoriteMovie(): LiveData<List<MovieEntity>> = movieDao.getFavoriteMovie()
+    fun getFavoriteMovie(): DataSource.Factory<Int, MovieEntity> = movieDao.getFavoriteMovie()
 
     fun setFavoriteMovie(movie: MovieEntity, newState: Boolean) {
         movie.favorite = newState
         movieDao.updateMovie(movie)
     }
 
-    fun getPopularTvShows(): LiveData<List<TvShowEntity>> = movieDao.getPopularTvShows()
+    fun getPopularTvShows(): DataSource.Factory<Int, TvShowEntity> = movieDao.getPopularTvShows()
 
     fun getDetailTvShow(tvShowId: Int): LiveData<TvShowEntity> = movieDao.getDetailTvShow(tvShowId)
 
-    fun getFavoriteTvShow(): LiveData<List<TvShowEntity>> = movieDao.getFavoriteTvShow()
+    fun getFavoriteTvShow(): DataSource.Factory<Int, TvShowEntity> = movieDao.getFavoriteTvShow()
 
     fun setTvShowMovie(tvShow: TvShowEntity, newState: Boolean) {
         tvShow.favorite = newState

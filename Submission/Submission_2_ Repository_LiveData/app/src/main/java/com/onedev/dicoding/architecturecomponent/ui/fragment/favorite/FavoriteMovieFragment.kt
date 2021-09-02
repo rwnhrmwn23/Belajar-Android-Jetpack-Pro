@@ -37,10 +37,11 @@ class FavoriteMovieFragment : Fragment() {
 
         binding?.progressBar?.visibility = View.VISIBLE
         viewModel.getFavoriteMovie().observe(viewLifecycleOwner, { movies ->
-            if (movies != null) {
-                binding?.progressBar?.visibility = View.GONE
-                movieAdapter.setMovies(movies)
-                movieAdapter.notifyDataSetChanged()
+            if (movies.size > 0) {
+                showData(true)
+                movieAdapter.submitList(movies)
+            } else {
+                showData(false)
             }
         })
 
@@ -48,6 +49,18 @@ class FavoriteMovieFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = movieAdapter
+        }
+    }
+
+    private fun showData(state: Boolean) {
+        if (state) {
+            binding?.rvFavMovie?.visibility = View.VISIBLE
+            binding?.progressBar?.visibility = View.GONE
+            binding?.imgEmpty?.visibility = View.GONE
+        } else {
+            binding?.rvFavMovie?.visibility = View.GONE
+            binding?.progressBar?.visibility = View.GONE
+            binding?.imgEmpty?.visibility = View.VISIBLE
         }
     }
 

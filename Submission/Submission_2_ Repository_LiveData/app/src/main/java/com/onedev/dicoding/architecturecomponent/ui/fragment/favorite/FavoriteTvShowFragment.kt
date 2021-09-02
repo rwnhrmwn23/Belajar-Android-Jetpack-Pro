@@ -37,10 +37,11 @@ class FavoriteTvShowFragment : Fragment() {
 
         binding?.progressBar?.visibility = View.VISIBLE
         viewModel.getFavoriteTvShow().observe(viewLifecycleOwner, { tvShow ->
-            if (tvShow != null) {
-                binding?.progressBar?.visibility = View.GONE
-                tvShowAdapter.setTvShows(tvShow)
-                tvShowAdapter.notifyDataSetChanged()
+            if (tvShow.size > 0) {
+                showData(true)
+                tvShowAdapter.submitList(tvShow)
+            } else {
+                showData(false)
             }
         })
 
@@ -50,6 +51,18 @@ class FavoriteTvShowFragment : Fragment() {
             adapter = tvShowAdapter
         }
 
+    }
+
+    private fun showData(state: Boolean) {
+        if (state) {
+            binding?.rvFavTvShow?.visibility = View.VISIBLE
+            binding?.progressBar?.visibility = View.GONE
+            binding?.imgEmpty?.visibility = View.GONE
+        } else {
+            binding?.rvFavTvShow?.visibility = View.GONE
+            binding?.progressBar?.visibility = View.GONE
+            binding?.imgEmpty?.visibility = View.VISIBLE
+        }
     }
 
     override fun onDestroyView() {

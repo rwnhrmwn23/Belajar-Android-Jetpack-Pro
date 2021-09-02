@@ -104,7 +104,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
         binding?.apply {
             imgPoster.loadImage(PICTURE_BASE_URL + movieDetail.poster_path)
-            tvTitle.text = movieDetail.title
+            collapsing.title = title
             tvOptionInformation.text = movieDetail.release_date
             tvGenre.text = movieDetail.genres.toString()
             tvDuration.text = movieDetail.runtime.toString()
@@ -120,7 +120,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         binding?.apply {
             tvOptionInformation.setStyleToItalic()
             imgPoster.loadImage(PICTURE_BASE_URL + tvShowDetail.poster_path)
-            tvTitle.text = tvShowDetail.name
             tvOptionInformation.text = tvShowDetail.tagline
             tvGenre.text = tvShowDetail.genres.toString()
             tvOverview.text = tvShowDetail.overview
@@ -154,10 +153,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             binding?.fabFavorite -> {
                 val extras = intent.extras
                 if (extras != null) {
-                    when(extras.getString(EXTRA_TYPE)) {
+                    when (extras.getString(EXTRA_TYPE)) {
                         getString(R.string.movie) -> viewModel.setFavoriteMovie(movieEntity, !movieEntity.favorite)
                         else -> viewModel.setTvShowMovie(tvShowEntity, !tvShowEntity.favorite)
                     }
+                    if (!movieEntity.favorite)
+                        this.showToast("Berhasil Menambahkan ke Daftar Favorit")
+                    else
+                        this.showToast("Berhasil Menghapus dari Daftar Favorit")
                 }
             }
         }

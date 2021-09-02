@@ -9,6 +9,7 @@ import com.onedev.dicoding.architecturecomponent.data.source.local.entity.MovieE
 import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailViewModel
 import com.onedev.dicoding.architecturecomponent.utils.DataDummy
+import com.onedev.dicoding.architecturecomponent.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -24,11 +25,11 @@ class DetailViewModelTest {
 
     private lateinit var viewModel: DetailViewModel
 
-    private val dummyMovie = DataDummy.getMovies()[0]
-    private val dummyMovieId = dummyMovie.id
+    private val dummyMovie = Resource.success(DataDummy.getMovies()[0])
+    private val dummyMovieId = dummyMovie.data?.id
 
-    private val dummyTvShow = DataDummy.getTvShows()[0]
-    private val dummyTvShowId = dummyTvShow.id
+    private val dummyTvShow = Resource.success(DataDummy.getTvShows()[0])
+    private val dummyTvShowId = dummyTvShow.data?.id
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -37,10 +38,10 @@ class DetailViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var movieDetailObserver: Observer<MovieEntity>
+    private lateinit var movieDetailObserver: Observer<Resource<MovieEntity>>
 
     @Mock
-    private lateinit var tvShowDetailObserver: Observer<TvShowEntity>
+    private lateinit var tvShowDetailObserver: Observer<Resource<TvShowEntity>>
 
     // Get Data Movie Testing
     @Before
@@ -50,50 +51,54 @@ class DetailViewModelTest {
 
     @Test
     fun getMovieDetail() {
-        val movie = MutableLiveData<MovieEntity>()
+        val movie = MutableLiveData<Resource<MovieEntity>>()
         movie.value = dummyMovie
 
-        `when`(movieRepository.getDetailMovie(dummyMovieId)).thenReturn(movie)
-        val detailEntity = viewModel.getDetailMovie(dummyMovieId).value
-        verify(movieRepository).getDetailMovie(dummyMovieId)
+        `when`(dummyMovieId?.let { movieRepository.getDetailMovie(it) }).thenReturn(movie)
+        val detailEntity = dummyMovieId?.let { viewModel.getDetailMovie(it).value?.data }
+        dummyMovieId?.let { verify(movieRepository).getDetailMovie(it) }
 
         assertNotNull(detailEntity)
-        assertEquals(dummyMovie.genres, detailEntity?.genres)
-        assertEquals(dummyMovie.id, detailEntity?.id)
-        assertEquals(dummyMovie.overview, detailEntity?.overview)
-        assertEquals(dummyMovie.popularity, detailEntity?.popularity)
-        assertEquals(dummyMovie.poster_path, detailEntity?.poster_path)
-        assertEquals(dummyMovie.release_date, detailEntity?.release_date)
-        assertEquals(dummyMovie.runtime, detailEntity?.runtime)
-        assertEquals(dummyMovie.status, detailEntity?.status)
-        assertEquals(dummyMovie.tagline, detailEntity?.tagline)
-        assertEquals(dummyMovie.title, detailEntity?.title)
-        assertEquals(dummyMovie.vote_average, detailEntity?.vote_average)
+        assertEquals(dummyMovie.data?.genres, detailEntity?.genres)
+        assertEquals(dummyMovie.data?.id, detailEntity?.id)
+        assertEquals(dummyMovie.data?.overview, detailEntity?.overview)
+        assertEquals(dummyMovie.data?.popularity, detailEntity?.popularity)
+        assertEquals(dummyMovie.data?.poster_path, detailEntity?.poster_path)
+        assertEquals(dummyMovie.data?.release_date, detailEntity?.release_date)
+        assertEquals(dummyMovie.data?.runtime, detailEntity?.runtime)
+        assertEquals(dummyMovie.data?.status, detailEntity?.status)
+        assertEquals(dummyMovie.data?.tagline, detailEntity?.tagline)
+        assertEquals(dummyMovie.data?.title, detailEntity?.title)
+        assertEquals(dummyMovie.data?.vote_average, detailEntity?.vote_average)
 
-        viewModel.getDetailMovie(dummyMovieId).observeForever(movieDetailObserver)
+        dummyMovieId?.let { viewModel.getDetailMovie(it).observeForever(movieDetailObserver) }
         verify(movieDetailObserver).onChanged(dummyMovie)
     }
 
     @Test
     fun getTvShowDetail() {
-        val tvShow = MutableLiveData<TvShowEntity>()
+        val tvShow = MutableLiveData<Resource<TvShowEntity>>()
         tvShow.value = dummyTvShow
 
-        `when`(movieRepository.getDetailTvShow(dummyTvShowId)).thenReturn(tvShow)
-        val detailEntity = viewModel.getDetailTvShow(dummyTvShowId).value
-        verify(movieRepository).getDetailTvShow(dummyTvShowId)
+        `when`(dummyTvShowId?.let { movieRepository.getDetailTvShow(it) }).thenReturn(tvShow)
+        val detailEntity = dummyTvShowId?.let { viewModel.getDetailTvShow(it).value?.data }
+        if (dummyTvShowId != null) {
+            verify(movieRepository).getDetailTvShow(dummyTvShowId)
+        }
 
         assertNotNull(detailEntity)
-        assertEquals(dummyTvShow.genres, detailEntity?.genres)
-        assertEquals(dummyTvShow.id, detailEntity?.id)
-        assertEquals(dummyTvShow.overview, detailEntity?.overview)
-        assertEquals(dummyTvShow.popularity, detailEntity?.popularity)
-        assertEquals(dummyTvShow.poster_path, detailEntity?.poster_path)
-        assertEquals(dummyTvShow.status, detailEntity?.status)
-        assertEquals(dummyTvShow.tagline, detailEntity?.tagline)
-        assertEquals(dummyTvShow.vote_average, detailEntity?.vote_average)
+        assertEquals(dummyTvShow.data?.genres, detailEntity?.genres)
+        assertEquals(dummyTvShow.data?.id, detailEntity?.id)
+        assertEquals(dummyTvShow.data?.overview, detailEntity?.overview)
+        assertEquals(dummyTvShow.data?.popularity, detailEntity?.popularity)
+        assertEquals(dummyTvShow.data?.poster_path, detailEntity?.poster_path)
+        assertEquals(dummyTvShow.data?.status, detailEntity?.status)
+        assertEquals(dummyTvShow.data?.tagline, detailEntity?.tagline)
+        assertEquals(dummyTvShow.data?.vote_average, detailEntity?.vote_average)
 
-        viewModel.getDetailTvShow(dummyTvShowId).observeForever(tvShowDetailObserver)
+        if (dummyTvShowId != null) {
+            viewModel.getDetailTvShow(dummyTvShowId).observeForever(tvShowDetailObserver)
+        }
         verify(tvShowDetailObserver).onChanged(dummyTvShow)
     }
 

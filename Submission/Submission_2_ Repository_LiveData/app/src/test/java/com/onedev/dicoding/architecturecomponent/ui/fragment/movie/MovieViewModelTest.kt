@@ -7,6 +7,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.onedev.dicoding.architecturecomponent.data.source.MovieRepository
 import com.onedev.dicoding.architecturecomponent.data.source.local.entity.MovieEntity
 import com.onedev.dicoding.architecturecomponent.utils.DataDummy
+import com.onedev.dicoding.architecturecomponent.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -29,7 +30,7 @@ class MovieViewModelTest {
     private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var observer: Observer<List<MovieEntity>>
+    private lateinit var observer: Observer<Resource<List<MovieEntity>>>
 
     @Before
     fun setup() {
@@ -38,16 +39,16 @@ class MovieViewModelTest {
 
     @Test
     fun getMovies() {
-        val dummyMovies = DataDummy.getMovies()
-        val movies = MutableLiveData<List<MovieEntity>>()
+        val dummyMovies = Resource.success(DataDummy.getMovies())
+        val movies = MutableLiveData<Resource<List<MovieEntity>>>()
         movies.value = dummyMovies
 
         `when`(movieRepository.getPopularMovie()).thenReturn(movies)
-        val movieEntities = viewModel.getPopularMovie().value
+        val movieEntities = viewModel.getPopularMovie().value?.data
         verify(movieRepository).getPopularMovie()
 
         assertNotNull(movieEntities)
-        assertEquals(3, movieEntities?.size)
+        assertEquals(1, movieEntities?.size)
 
         viewModel.getPopularMovie().observeForever(observer)
         verify(observer).onChanged(dummyMovies)

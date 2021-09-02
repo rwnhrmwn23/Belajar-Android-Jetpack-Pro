@@ -26,15 +26,15 @@ object DataDummy {
     fun getTvShows(): List<TvShowEntity> {
         return listOf(
             TvShowEntity(
-                77169,
-                "Cobra Kai",
-                "/obLBdhLxheKg8Li1qO11r2SwmYO.jpg",
-                8.1,
+                91363,
+                "What If...?",
+                "/lztz5XBMG1x6Y5ubz7CxfPFsAcW.jpg",
+                8.5,
                 "Action",
-                "This Karate Kid sequel series picks up 30 years after the events of the 1984 All Valley Karate Tournament and finds Johnny Lawrence on the hunt for redemption by reopening the infamous Cobra Kai karate dojo. This reignites his old rivalry with the successful Daniel LaRusso, who has been working to maintain the balance in his life without mentor Mr. Miyagi.",
-                1132.227,
-                "Release",
-                "Cobra Kai never dies."
+                "Taking inspiration from the comic books of the same name, each episode explores a pivotal moment from the Marvel Cinematic Universe and turns it on its head, leading the audience into uncharted territory.",
+                3180.772,
+                "Returning Series",
+                 "One question changes everything."
             )
         )
     }
@@ -127,17 +127,17 @@ object DataDummy {
             TvShowResponseResult(
                 backdrop_path = "/gL8myjGc2qrmqVosyGm5CWTir9A.jpg",
                 first_air_date = "2018-05-02",
-                id = 77169,
-                name = "Cobra Kai",
+                id = 91363,
+                name = "What If...?",
                 genres = listOf("Action", "Drama"),
                 original_language = "en",
-                original_name = "Cobra Kai",
-                overview = "This Karate Kid sequel series picks up 30 years after the events of the 1984 All Valley Karate Tournament and finds Johnny Lawrence on the hunt for redemption by reopening the infamous Cobra Kai karate dojo. This reignites his old rivalry with the successful Daniel LaRusso, who has been working to maintain the balance in his life without mentor Mr. Miyagi.",
-                popularity = 1132.227,
-                poster_path = "/obLBdhLxheKg8Li1qO11r2SwmYO.jpg",
-                status = "Release",
+                original_name = "What If...?",
+                overview = "Taking inspiration from the comic books of the same name, each episode explores a pivotal moment from the Marvel Cinematic Universe and turns it on its head, leading the audience into uncharted territory.",
+                popularity = 3180.772,
+                poster_path = "/lztz5XBMG1x6Y5ubz7CxfPFsAcW.jpg",
+                status = "Returning Series",
                 tagline = "tagline",
-                vote_average = 8.1,
+                vote_average = 8.5,
                 vote_count = 1717
             )
         )
@@ -155,11 +155,11 @@ object DataDummy {
                     name = "Drama"
                 )
             ),
-            id = 77169,
-            name = "Cobra Kai",
-            overview = "This Karate Kid sequel series picks up 30 years after the events of the 1984 All Valley Karate Tournament and finds Johnny Lawrence on the hunt for redemption by reopening the infamous Cobra Kai karate dojo. This reignites his old rivalry with the successful Daniel LaRusso, who has been working to maintain the balance in his life without mentor Mr. Miyagi.",
-            popularity = 1132.227,
-            poster_path = "/obLBdhLxheKg8Li1qO11r2SwmYO.jpg",
+            id = 91363,
+            name = "What If...?",
+            overview = "Taking inspiration from the comic books of the same name, each episode explores a pivotal moment from the Marvel Cinematic Universe and turns it on its head, leading the audience into uncharted territory.",
+            popularity = 3180.772,
+            poster_path = "/lztz5XBMG1x6Y5ubz7CxfPFsAcW.jpg",
             production_companies = listOf(
                 DetailProductionCompany(
                     id = 11073,
@@ -175,8 +175,8 @@ object DataDummy {
                 ),
             ),
             status = "Returning Series",
-            tagline = "Cobra Kai never dies.",
-            vote_average = 8.1,
+            tagline =  "One question changes everything.",
+            vote_average = 8.5,
         )
     }
 }

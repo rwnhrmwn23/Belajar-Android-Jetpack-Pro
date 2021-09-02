@@ -44,7 +44,7 @@ class FavoriteTvShowFragment : Fragment() {
             }
         })
 
-        binding?.rvTvShow?.apply {
+        binding?.rvFavTvShow?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
             adapter = tvShowAdapter

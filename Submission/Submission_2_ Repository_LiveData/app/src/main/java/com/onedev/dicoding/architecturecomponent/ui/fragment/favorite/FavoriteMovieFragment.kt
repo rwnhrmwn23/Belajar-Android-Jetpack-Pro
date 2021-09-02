@@ -44,7 +44,7 @@ class FavoriteMovieFragment : Fragment() {
             }
         })
 
-        binding?.rvMovie?.apply {
+        binding?.rvFavMovie?.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = movieAdapter

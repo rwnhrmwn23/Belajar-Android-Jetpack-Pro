@@ -53,8 +53,7 @@ class FakeMovieRepository constructor(
                         i.runtime,
                         i.status,
                         i.tagline,
-                        false
-                    )
+                        false)
                     movies.add(movieEntities)
                 }
                 localDataSource.insertMovies(movies)
@@ -90,8 +89,7 @@ class FakeMovieRepository constructor(
                         release_date,
                         runtime,
                         status,
-                        tagline
-                    )
+                        tagline)
                     localDataSource.updateMovie(movieEntity)
                 }
             }
@@ -99,8 +97,7 @@ class FakeMovieRepository constructor(
     }
 
     override fun getPopularTvShow(): LiveData<Resource<PagedList<TvShowEntity>>> {
-        return object :
-            NetworkBoundResource<PagedList<TvShowEntity>, List<TvShowResponseResult>>(appExecutors) {
+        return object : NetworkBoundResource<PagedList<TvShowEntity>, List<TvShowResponseResult>>(appExecutors) {
             override fun loadFromDB(): LiveData<PagedList<TvShowEntity>> {
                 val config = PagedList.Config.Builder()
                     .setEnablePlaceholders(false)
@@ -128,8 +125,7 @@ class FakeMovieRepository constructor(
                         i.overview,
                         i.popularity,
                         i.status,
-                        i.tagline
-                    )
+                        i.tagline)
                     tvShows.add(tvShowEntities)
                 }
                 localDataSource.insertTvShow(tvShows)
@@ -154,7 +150,7 @@ class FakeMovieRepository constructor(
                     listGenre.add(i.name)
                 }
                 with(data) {
-                    val tvShowEntity = TvShowEntity(
+                    val tvShowEntity =TvShowEntity(
                         id,
                         name,
                         poster_path,
@@ -163,8 +159,7 @@ class FakeMovieRepository constructor(
                         overview,
                         popularity,
                         status,
-                        tagline
-                    )
+                        tagline)
                     localDataSource.updateTvShow(tvShowEntity)
                 }
             }

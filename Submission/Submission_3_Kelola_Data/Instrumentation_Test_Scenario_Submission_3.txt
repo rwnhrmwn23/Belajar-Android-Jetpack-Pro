@@ -1,10 +1,10 @@
 Skenario Instrumentation Test
 
-1. Menampilkan Data Film loadMovies()
+1. Menampilkan Data Movie loadMovies()
 	- Memastikan rv_movie dalam keadaan tampil
 	- Scroll rv_movie ke posisi data terakhir.
 
-2. Menampilkan Deta Detail Film loadDetailMovie()
+2. Menampilkan Deta Detail Movie loadDetailMovie()
 	- Memberi tindakan click data pertama pada rv_movie
 	- Memastikan img_poster tampil dan data sesuai yang diharapkan
 	- Memastikan collapsing toolbar tampil dan data sesuai yang diharapkan
@@ -17,7 +17,7 @@ Skenario Instrumentation Test
 	- Memastikan rv_tv_show dalam keadaan tampil
 	- Scroll rv_tv_show ke posisi data terakhir.
 
-4. Menampilkan Data Detail Film loadDetailTvShow()
+4. Menampilkan Data Detail TV Show loadDetailTvShow()
 	- Memberi tindakan click fragment R.id.tvShowFragment pada bottom navigation
 	- Memberi tindakan click data ke 11 pada rv_tv_show
 	- Memastikan img_poster tampil dan data sesuai yang diharapkan
@@ -25,12 +25,7 @@ Skenario Instrumentation Test
 	- Memastikan tv_option_information tampil dan data sesuai yang diharapkan
 	- Memastikan tv_overview tampil dan data sesuai yang diharapkan
 
-5. Menampilkan Data Movie Favorit loadFavMovies()
-	- Memberi tindakan click fragment favoriteFragment pada bottom navigation
-	- Memastikan rv_fav_movie dalam keadaan tampil
-	- Scroll rv_fav_movie ke posisi data terakhir.
-
-6. Menampilkan Data Detail Movie Favorit loadDetailFavMovie()
+5. Menampilkan Data Movie Favorite loadFavoriteMovie()
 	- Memastikan rv_movie dalam keaadan tampil
 	- Memberi tindakan click data pertama pada rv_movie
 	- Memberi tindakan click fab_favorite untuk update data ke dalam table Movie Favorit
@@ -43,13 +38,12 @@ Skenario Instrumentation Test
 	- Memastikan tv_duration tampil dan data sesuai yang diharapkan
 	- Memastikan tv_overview tampil dan data sesuai yang diharapkan
 
-7. Menampilkan Data Tv Show Favorit loadFavTvShow()
+6. Menampilkan Info Data Kosong pada Movie Favorite loadNullFavoriteMovies()
 	- Memberi tindakan click fragment favoriteFragment pada bottom navigation
-	- Memberi tindakan click dengan pada yang bertuliskan TV SHOW
-	- Memastikan rv_fav_tv_show dalam keadaan tampil
-	- Scroll rv_fav_tv_show ke posisi data terakhir.
+	- Memastikan rv_fav_movie tidak dalam keadaan tampil
+	- Memastikan img_empty dalam keadaan tampil
 
-8. Menampilkan Data Detail Film Favorit loadDetailFavTvShow()
+7. Menampilkan Data Detail Favorite TV Show loadFavoriteTvShow()
 	- Memberi tindakan click fragment favoriteFragment pada bottom navigation
 	- Memastikan rv_tv_show dalam keaadan tampil
 	- Memberi tindakan click data 11 pada rv_tv_show
@@ -63,4 +57,10 @@ Skenario Instrumentation Test
 	- Memastikan tv_option_information tampil dan data sesuai yang diharapkan
 	- Memastikan tv_duration tampil dan data sesuai yang diharapkan
 	- Memastikan tv_overview tampil dan data sesuai yang diharapkan
+
+8. Menampilkan Info Data Kosong pada Favorite Tv Show loadNullFavoriteTvShow()
+	- Memberi tindakan click fragment favoriteFragment pada bottom navigation
+	- Memberi tindakan click dengan pada yang bertuliskan TV SHOW
+	- Memastikan rv_fav_tv_show tidak dalam keadaan tampil
+	- Memastikan img_empty dalam keadaan tampil
 

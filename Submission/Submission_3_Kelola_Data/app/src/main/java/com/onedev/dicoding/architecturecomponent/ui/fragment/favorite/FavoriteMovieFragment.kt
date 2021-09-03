@@ -57,6 +57,7 @@ class FavoriteMovieFragment : Fragment() {
             binding?.progressBar?.visibility = View.GONE
             binding?.imgEmpty?.visibility = View.GONE
         } else {
+            binding?.rvFavMovie?.visibility = View.GONE
             binding?.progressBar?.visibility = View.GONE
             binding?.imgEmpty?.visibility = View.VISIBLE
         }

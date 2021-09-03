@@ -118,13 +118,13 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.title = title
 
         binding?.apply {
-            tvOptionInformation.setStyleToItalic()
             imgPoster.loadImage(PICTURE_BASE_URL + tvShowDetail.poster_path)
             tvOptionInformation.text = tvShowDetail.tagline
             tvGenre.text = tvShowDetail.genres.toString()
             tvOverview.text = tvShowDetail.overview
             tvDuration.visibility = View.INVISIBLE
             setFavoriteState(tvShowDetail.favorite)
+            tvOptionInformation.setStyleToItalic()
         }
     }
 

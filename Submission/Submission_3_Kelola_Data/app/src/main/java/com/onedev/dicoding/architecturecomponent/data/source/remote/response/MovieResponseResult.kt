@@ -3,7 +3,7 @@ package com.onedev.dicoding.architecturecomponent.data.source.remote.response
 data class MovieResponseResult(
     val backdrop_path: String,
     val id: Int,
-    val genres: List<DetailGenre>,
+    val genres: List<DetailGenre>? = null,
     val original_title: String,
     val overview: String,
     val popularity: Double,

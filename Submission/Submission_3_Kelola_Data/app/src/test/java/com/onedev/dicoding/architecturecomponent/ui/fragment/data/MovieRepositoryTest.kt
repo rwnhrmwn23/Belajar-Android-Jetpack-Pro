@@ -83,11 +83,36 @@ class MovieRepositoryTest {
         dummyDetailTvShow.value = DataDummy.getTvShows()[0]
         `when`(local.getDetailTvShow(tvShowId)).thenReturn(dummyDetailTvShow)
 
-        val tvShowEntity =
-            LiveDataTestUtil.getValue(movieCatalogueRepository.getDetailTvShow(tvShowId))
+        val tvShowEntity = LiveDataTestUtil.getValue(movieCatalogueRepository.getDetailTvShow(tvShowId))
         verify(local).getDetailTvShow(tvShowId)
 
         assertNotNull(tvShowEntity)
         assertEquals(tvShowDetail.id, tvShowEntity.data?.id)
+    }
+
+    @Test
+    fun getFavoriteMovie() {
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(local.getFavoriteMovie()).thenReturn(dataSourceFactory)
+        movieCatalogueRepository.getFavoriteMovie()
+
+        val movieEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.getMovies()))
+        verify(local).getFavoriteMovie()
+
+        assertNotNull(movieEntities)
+        assertEquals(moviesResponse.size.toLong(), movieEntities.data?.size?.toLong())
+    }
+
+    @Test
+    fun getFavoriteTvShow() {
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvShowEntity>
+        `when`(local.getFavoriteTvShow()).thenReturn(dataSourceFactory)
+        movieCatalogueRepository.getFavoriteTvShow()
+
+        val movieEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.getTvShows()))
+        verify(local).getFavoriteTvShow()
+
+        assertNotNull(movieEntities)
+        assertEquals(tvShowResponse.size.toLong(), movieEntities.data?.size?.toLong())
     }
 }

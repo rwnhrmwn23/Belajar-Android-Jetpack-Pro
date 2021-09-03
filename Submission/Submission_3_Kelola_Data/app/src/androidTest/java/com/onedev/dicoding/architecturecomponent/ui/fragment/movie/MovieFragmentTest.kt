@@ -22,8 +22,6 @@ class MovieFragmentTest {
 
     private val dummyMovie = DataDummy.getMovies()
     private val dummyTvShow = DataDummy.getTvShows()
-    private val dummyDetailMovie = DataDummy.getMovies()[0]
-    private val dummyDetailTvShow = DataDummy.getTvShows()[0]
 
     @Before
     fun setup() {
@@ -44,20 +42,12 @@ class MovieFragmentTest {
 
     @Test
     fun loadDetailMovie() {
-        onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(3, click()))
-
+        onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.img_poster)).check(matches(isDisplayed()))
-
         onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
-
         onView(withId(R.id.tv_option_information)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_option_information)).check(matches(withText(dummyDetailMovie.release_date)))
-
         onView(withId(R.id.tv_duration)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_duration)).check(matches(withText(dummyDetailMovie.runtime.toString())))
-
         onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_overview)).check(matches(withText(dummyDetailMovie.overview)))
     }
 
     @Test
@@ -70,72 +60,57 @@ class MovieFragmentTest {
     @Test
     fun loadDetailTvShow() {
         onView(withId(R.id.tvShowFragment)).perform(click())
-        onView(withId(R.id.rv_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(11, click()))
-
+        onView(withId(R.id.rv_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
         onView(withId(R.id.img_poster)).check(matches(isDisplayed()))
-
         onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
-
         onView(withId(R.id.tv_option_information)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_option_information)).check(matches(withText(dummyDetailTvShow.tagline)))
-
         onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_overview)).check(matches(withText(dummyDetailTvShow.overview)))
     }
 
     @Test
-    fun loadFavMovies() {
-        onView(withId(R.id.favoriteFragment)).perform(click())
-        onView(withId(R.id.rv_fav_movie)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_fav_movie)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyMovie.size))
-    }
-
-    @Test
-    fun loadDetailFavMovie() {
+    fun loadFavoriteMovie() {
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-
         onView(withId(R.id.fab_favorite)).perform(click())
         onView(isRoot()).perform(ViewActions.pressBack())
-
         onView(withId(R.id.favoriteFragment)).perform(click())
         onView(withId(R.id.rv_fav_movie)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.fab_favorite)).perform(click())
-
         onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
-
         onView(withId(R.id.tv_option_information)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_duration)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun loadFavTvShow() {
+    fun loadNullFavoriteMovies() {
         onView(withId(R.id.favoriteFragment)).perform(click())
-        onView(withText("TV SHOW")).perform(click())
-        onView(withId(R.id.rv_fav_tv_show)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_fav_tv_show)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyTvShow.size))
+        onView(withId(R.id.rv_fav_movie)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.img_empty)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun loadDetailFavTvShow() {
+    fun loadFavoriteTvShow() {
         onView(withId(R.id.tvShowFragment)).perform(click())
         onView(withId(R.id.rv_tv_show)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(11, click()))
-
+        onView(withId(R.id.rv_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
         onView(withId(R.id.fab_favorite)).perform(click())
         onView(isRoot()).perform(ViewActions.pressBack())
-
         onView(withId(R.id.favoriteFragment)).perform(click())
         onView(withText("TV SHOW")).perform(click())
         onView(withId(R.id.rv_fav_tv_show)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
         onView(withId(R.id.fab_favorite)).perform(click())
-
         onView(withId(R.id.collapsing)).check(matches(isDisplayed()))
-
         onView(withId(R.id.tv_option_information)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_overview)).check(matches(isDisplayed()))
-
         onView(withId(R.id.tv_duration)).check(matches(not(isDisplayed())))
+    }
+
+    @Test
+    fun loadNullFavoriteTvShow() {
+        onView(withId(R.id.favoriteFragment)).perform(click())
+        onView(withText("TV SHOW")).perform(click())
+        onView(withId(R.id.rv_fav_tv_show)).check(matches(not(isDisplayed())))
+        onView(withId(R.id.img_empty)).check(matches(isDisplayed()))
     }
 }

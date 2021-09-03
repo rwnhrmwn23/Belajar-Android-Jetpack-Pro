@@ -58,6 +58,7 @@ class FavoriteTvShowFragment : Fragment() {
             binding?.progressBar?.visibility = View.GONE
             binding?.imgEmpty?.visibility = View.GONE
         } else {
+            binding?.rvFavTvShow?.visibility = View.GONE
             binding?.progressBar?.visibility = View.GONE
             binding?.imgEmpty?.visibility = View.VISIBLE
         }

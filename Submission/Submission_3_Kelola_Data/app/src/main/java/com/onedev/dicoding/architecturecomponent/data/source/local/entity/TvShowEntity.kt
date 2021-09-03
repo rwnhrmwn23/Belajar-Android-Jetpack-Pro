@@ -12,7 +12,7 @@ data class TvShowEntity(
     val vote_average: Double? = 0.0,
     val genres: String? = null,
     val overview: String? = null,
-    val popularity: Double? = null,
+    val popularity: Double? = 0.0,
     val status: String? = null,
     val tagline: String? = null,
     var favorite: Boolean = false

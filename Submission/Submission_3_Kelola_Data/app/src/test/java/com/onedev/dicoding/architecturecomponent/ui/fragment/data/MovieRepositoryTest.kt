@@ -62,6 +62,14 @@ class MovieRepositoryTest {
 
         assertNotNull(movieDetailEntity)
         assertEquals(movieDetail.id, movieDetailEntity.data?.id)
+        assertEquals(movieDetail.title, movieDetailEntity.data?.title)
+        assertEquals(movieDetail.poster_path, movieDetailEntity.data?.poster_path)
+        assertEquals(movieDetail.vote_average, movieDetailEntity.data?.vote_average)
+        assertEquals(movieDetail.overview, movieDetailEntity.data?.overview)
+        assertEquals(movieDetail.popularity, movieDetailEntity.data?.popularity)
+        assertEquals(movieDetail.runtime, movieDetailEntity.data?.runtime)
+        assertEquals(movieDetail.status, movieDetailEntity.data?.status)
+        assertEquals(movieDetail.tagline, movieDetailEntity.data?.tagline)
     }
 
     @Test
@@ -88,6 +96,13 @@ class MovieRepositoryTest {
 
         assertNotNull(tvShowEntity)
         assertEquals(tvShowDetail.id, tvShowEntity.data?.id)
+        assertEquals(tvShowDetail.name, tvShowEntity.data?.name)
+        assertEquals(tvShowDetail.poster_path, tvShowEntity.data?.poster_path)
+        assertEquals(tvShowDetail.vote_average, tvShowEntity.data?.vote_average)
+        assertEquals(tvShowDetail.overview, tvShowEntity.data?.overview)
+        assertEquals(tvShowDetail.popularity, tvShowEntity.data?.popularity)
+        assertEquals(tvShowDetail.status, tvShowEntity.data?.status)
+        assertEquals(tvShowDetail.tagline, tvShowEntity.data?.tagline)
     }
 
     @Test

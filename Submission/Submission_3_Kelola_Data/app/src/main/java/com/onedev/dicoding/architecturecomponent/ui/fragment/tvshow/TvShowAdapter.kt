@@ -1,19 +1,16 @@
 package com.onedev.dicoding.architecturecomponent.ui.fragment.tvshow
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.onedev.dicoding.architecturecomponent.R
 import com.onedev.dicoding.architecturecomponent.data.api.PICTURE_BASE_URL
 import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.databinding.ItemsTvShowsBinding
-import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailActivity
 import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.loadImage
 
-class TvShowAdapter :
+class TvShowAdapter(private val callback: ItemClicked) :
     PagedListAdapter<TvShowEntity, TvShowAdapter.TvShowViewHolder>(DIFF_CALLBACK) {
 
     companion object {
@@ -44,7 +41,7 @@ class TvShowAdapter :
         }
     }
 
-    class TvShowViewHolder(private val binding: ItemsTvShowsBinding) :
+    inner class TvShowViewHolder(private val binding: ItemsTvShowsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShows: TvShowEntity) {
             with(binding) {
@@ -52,15 +49,13 @@ class TvShowAdapter :
                 tvTitleTvShow.text = tvShows.name
                 tvVoteAverage.text = tvShows.vote_average.toString()
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.EXTRA_ID, tvShows.id)
-                    intent.putExtra(
-                        DetailActivity.EXTRA_TYPE,
-                        itemView.resources.getString(R.string.tv_show)
-                    )
-                    itemView.context.startActivity(intent)
+                    callback.intentToDetailActivity(tvShows)
                 }
             }
         }
+    }
+
+    interface ItemClicked {
+        fun intentToDetailActivity(tvShows: TvShowEntity)
     }
 }

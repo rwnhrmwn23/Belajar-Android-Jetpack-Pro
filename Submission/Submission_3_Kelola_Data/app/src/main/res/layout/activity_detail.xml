@@ -25,13 +25,14 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                tools:ignore="ContentDescription"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                android:contentDescription="@string/poster_movie" />
 
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                tools:src="@drawable/image_front_shadow" />
+                tools:src="@drawable/image_front_shadow"
+                android:contentDescription="@string/poster_movie" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

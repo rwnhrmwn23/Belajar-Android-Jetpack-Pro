@@ -1,6 +1,7 @@
 package com.onedev.dicoding.architecturecomponent.ui.fragment.tvshow
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.onedev.dicoding.architecturecomponent.R
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentTvShowBinding
+import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailActivity
 import com.onedev.dicoding.architecturecomponent.utils.ExtHelper.showToast
 import com.onedev.dicoding.architecturecomponent.viewmodel.ViewModelFactory
 import com.onedev.dicoding.architecturecomponent.vo.Status
 
-class TvShowFragment : Fragment() {
+class TvShowFragment : Fragment(), TvShowAdapter.ItemClicked {
     private lateinit var factory: ViewModelFactory
     private lateinit var viewModel: TvShowViewModel
     private lateinit var tvShowAdapter: TvShowAdapter
@@ -32,7 +36,7 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvShowAdapter = TvShowAdapter()
+        tvShowAdapter = TvShowAdapter(this)
         factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
@@ -64,5 +68,12 @@ class TvShowFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun intentToDetailActivity(tvShows: TvShowEntity) {
+        val intent = Intent(requireContext(), DetailActivity::class.java)
+        intent.putExtra(DetailActivity.EXTRA_ID, tvShows.id)
+        intent.putExtra(DetailActivity.EXTRA_TYPE, getString(R.string.tv_show))
+        requireContext().startActivity(intent)
     }
 }

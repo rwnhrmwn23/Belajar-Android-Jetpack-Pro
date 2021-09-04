@@ -14,8 +14,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
+        android:scaleType="center"
         android:contentDescription="@string/poster_movie"
-        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,12 +39,12 @@
         style="@style/TextViewSubTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_baseline_star"
         android:drawablePadding="8dp"
         android:gravity="center_vertical"
         android:text="@string/dummy_vote"
         app:layout_constraintEnd_toEndOf="@+id/tv_title_tv_show"
         app:layout_constraintStart_toStartOf="@+id/tv_title_tv_show"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_tv_show" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_tv_show"
+        app:drawableStartCompat="@drawable/ic_baseline_star" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

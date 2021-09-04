@@ -1,5 +1,6 @@
 package com.onedev.dicoding.architecturecomponent.ui.fragment.favorite
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.onedev.dicoding.architecturecomponent.R
+import com.onedev.dicoding.architecturecomponent.data.source.local.entity.TvShowEntity
 import com.onedev.dicoding.architecturecomponent.databinding.FragmentFavoriteTvShowBinding
+import com.onedev.dicoding.architecturecomponent.ui.activity.detail.DetailActivity
 import com.onedev.dicoding.architecturecomponent.ui.fragment.tvshow.TvShowAdapter
 import com.onedev.dicoding.architecturecomponent.viewmodel.ViewModelFactory
 
-class FavoriteTvShowFragment : Fragment() {
+class FavoriteTvShowFragment : Fragment(), TvShowAdapter.ItemClicked {
     private lateinit var viewModel: FavoriteViewModel
     private lateinit var factory: ViewModelFactory
     private lateinit var tvShowAdapter: TvShowAdapter
@@ -31,7 +35,7 @@ class FavoriteTvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tvShowAdapter = TvShowAdapter()
+        tvShowAdapter = TvShowAdapter(this)
         factory = ViewModelFactory.getInstance(requireActivity())
         viewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
 
@@ -67,5 +71,12 @@ class FavoriteTvShowFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun intentToDetailActivity(tvShows: TvShowEntity) {
+        val intent = Intent(requireContext(), DetailActivity::class.java)
+        intent.putExtra(DetailActivity.EXTRA_ID, tvShows.id)
+        intent.putExtra(DetailActivity.EXTRA_TYPE, getString(R.string.tv_show))
+        requireContext().startActivity(intent)
     }
 }

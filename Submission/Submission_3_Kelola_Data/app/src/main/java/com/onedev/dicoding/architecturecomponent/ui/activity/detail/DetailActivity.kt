@@ -55,7 +55,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                                 }
                                 Status.ERROR -> {
                                     binding?.progressBar?.visibility = View.VISIBLE
-                                    this.showToast("Terjadi Kesalahan")
+                                    this.showToast(getString(R.string.error))
                                 }
                             }
                         }
@@ -75,7 +75,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                                 }
                                 Status.ERROR -> {
                                     binding?.progressBar?.visibility = View.VISIBLE
-                                    this.showToast("Terjadi Kesalahan")
+                                    this.showToast(getString(R.string.error))
                                 }
                             }
                         }

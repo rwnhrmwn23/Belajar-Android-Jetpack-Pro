@@ -2,6 +2,7 @@ package com.onedev.dicoding.architecturecomponent.utils
 
 import android.content.Context
 import android.graphics.Typeface
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -22,6 +23,14 @@ object ExtHelper {
     }
 
     fun TextView.setStyleToItalic() {
-        this.setTypeface(this.typeface, Typeface.ITALIC)
+        setTypeface(typeface, Typeface.ITALIC)
+    }
+
+    fun View.visible() {
+        visibility = View.VISIBLE
+    }
+
+    fun View.gone() {
+        visibility = View.GONE
     }
 }
